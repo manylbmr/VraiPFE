@@ -13,7 +13,7 @@
         <!--begin::Modal header-->
         <div class="modal-header" id="kt_modal_add_customer_header">
           <!--begin::Modal title-->
-          <h2 class="fw-bold">Add a Customer</h2>
+          <h2 class="fw-bold">Ajouter un employé</h2>
           <!--end::Modal title-->
 
           <!--begin::Close-->
@@ -47,10 +47,208 @@
               data-kt-scroll-wrappers="#kt_modal_add_customer_scroll"
               data-kt-scroll-offset="300px"
             >
+
+
+
+<!--begin::Input group-->
+<div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">
+                    <span class="required">Pays de naissance</span>
+
+                    <i
+                      class="fas fa-exclamation-circle ms-1 fs-7"
+                      data-bs-toggle="tooltip"
+                      title="pays de naissance"
+                    ></i>
+                  </label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <el-select v-model="formData.country">
+                    <el-option value="">Choisissez un pays</el-option>
+                    <el-option
+                      v-for="(item, i) in countries"
+                      :key="`countries-select-option-${i}`"
+                      :value="item.code"
+                    >
+                      {{ item.name }}
+                    </el-option>
+                  </el-select>
+                  <!--end::Input-->
+                </div>
+                <!--end::Input group-->
+
+
+
+
+
+
+             <!--begin::Input group-->
+             <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">
+                    <span class="required">Sexe</span>
+
+                    <i
+                      class="fas fa-exclamation-circle ms-1 fs-7"
+                      data-bs-toggle="tooltip"
+                      title="Sexe"
+                    ></i>
+                  </label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <el-select v-model="formData.sexe">
+                    <el-option value="">Chosissez un sexe</el-option>
+                    <el-option value="homme">Homme</el-option>
+                    <el-option value="femme">Femme</el-option>
+                    
+                  </el-select>
+                  <!--end::Input-->
+                </div>
+                <!--end::Input group-->
+
+
+
+
+                 <!--begin::Input group-->
+                 <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">
+                    <span>Equipe</span>
+
+                    <i
+                      class="fas fa-exclamation-circle ms-1 fs-7"
+                      data-bs-toggle="tooltip"
+                      title=" Equipe"
+                    ></i>
+                  </label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <el-select v-model="formData.equipe">
+                  
+                    <el-option
+                      v-for="(item, i) in countries"
+                      :key="`countries-select-option-${i}`"
+                      :value="item.code"
+                    >
+                      {{ item.name }}
+                    </el-option>
+                  </el-select>
+                  <!--end::Input-->
+                </div>
+                <!--end::Input group-->
+
+
+
+
+
+ <!--begin::Input group-->
+ <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">
+                    <span class="required">Poste</span>
+
+                    <i
+                      class="fas fa-exclamation-circle ms-1 fs-7"
+                      data-bs-toggle="tooltip"
+                      title="Poste"
+                    ></i>
+                  </label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <el-select v-model="formData.poste">
+                    <el-option value="">Choisissez un poste</el-option>
+                    <el-option
+                      v-for="(item, i) in countries"
+                      :key="`countries-select-option-${i}`"
+                      :value="item.code"
+                    >
+                      {{ item.name }}
+                    </el-option>
+                  </el-select>
+                  <!--end::Input-->
+                </div>
+                <!--end::Input group-->
+
+
+
+
+                 <!--begin::Input group-->
+                 <div class="d-flex flex-column mb-7 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-6 fw-semibold mb-2">
+                    <span class="required">Situation Familiale</span>
+
+                    <i
+                      class="fas fa-exclamation-circle ms-1 fs-7"
+                      data-bs-toggle="tooltip"
+                      title="Situation Familiale"
+                    ></i>
+                  </label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <el-select v-model="formData.sf">
+                    <el-option value="">Choisissez une situation Familiale</el-option>
+                    <el-option value="Marié"> Marié</el-option>
+                    <el-option value="Célibataire"> Célibataire </el-option>
+                    <el-option value="Divorcé"> Divorcé </el-option>
+                    <el-option value="Veuf"> Veuf </el-option>
+
+                  </el-select>
+                  <!--end::Input-->
+                </div>
+                <!--end::Input group-->
+               
+
+
+                  <!--begin::Input group-->
+                  <div class="d-flex flex-column mb-7 fv-row">
+                    <!--begin::Label-->
+                    <label class="fs-6 fw-semibold mb-2">
+                      <span class="required">Nombre d'enfants</span>
+  
+                      <i
+                        class="fas fa-exclamation-circle ms-1 fs-7"
+                        data-bs-toggle="tooltip"
+                        title="Nombre d'enfants"
+                      ></i>
+                    </label>
+                    <!--end::Label-->
+  
+                    <!--begin::Input-->
+                    <el-select v-model="formData.ne">
+                      <el-option value="">Choisissez le nombre d'enfants</el-option>
+                      <el-option value="0"> 0 </el-option>
+                      <el-option value="1"> 1 </el-option>
+                      <el-option value="2"> 2 </el-option>
+                      <el-option value="3"> 3 </el-option>
+                      <el-option value="4"> 4 </el-option>
+                      <el-option value="5"> 5 </el-option>
+                      <el-option value="6"> 6 </el-option>
+                      <el-option value="7"> 7 </el-option>
+                      <el-option value="8"> 8 </el-option>
+                      <el-option value="9"> 9 </el-option>
+                      <el-option value="10"> 10 </el-option>
+                      <el-option value="11"> 11 </el-option>
+                      <el-option value="12"> 12 </el-option>
+                    </el-select>
+                    <!--end::Input-->
+                  </div>
+                <!--end::Input group-->
+
+
+
+
+
               <!--begin::Input group-->
               <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="required fs-6 fw-semibold mb-2">Name</label>
+                <label class="required fs-6 fw-semibold mb-2">Nom</label>
                 <!--end::Label-->
 
                 <!--begin::Input-->
@@ -65,8 +263,177 @@
               </div>
               <!--end::Input group-->
 
+
+
+<!--begin::Input group-->
+<div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">Prénom</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="prenom">
+                  <el-input
+                    v-model="formData.prenom"
+                    type="text"
+                    placeholder=""
+                  />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+
               <!--begin::Input group-->
               <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">Nom Arabe</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="nameAr">
+                  <el-input
+                    v-model="formData.nameAr"
+                    type="text"
+                    placeholder=""
+                  />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">Prénom Arabe</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="prenomAr">
+                  <el-input
+                    v-model="formData.prenomAr"
+                    type="text"
+                    placeholder=""
+                  />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">Nom de jeune fill</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="ndjf">
+                  <el-input
+                    v-model="formData.ndjf"
+                    type="text"
+                    placeholder=""
+                  />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">Nom de jeune fille arabe</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="ndjfAr">
+                  <el-input
+                    v-model="formData.ndjfAr"
+                    type="text"
+                    placeholder=""
+                  />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">Date de Naissance</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="ddn">
+                  <el-input
+                    v-model="formData.ddn"
+                    type="date"
+                    placeholder=""
+                  />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">Lieu de Naissance</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="ldn">
+                  <el-input
+                    v-model="formData.ldn"
+                    type="text"
+                    placeholder=""
+                  />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+
+              
+
+
+
+
+
+
+
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semibold mb-2">
+                  <span class="required">Telephone</span>
+
+                  <i
+                    class="fas fa-exclamation-circle ms-1 fs-7"
+                    data-bs-toggle="tooltip"
+                    title="Telephone doit etre actif"
+                  ></i>
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="tel">
+                  <el-input v-model="formData.tel" />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+
+
+                <!--begin::Input group-->
+                <div class="fv-row mb-7">
                 <!--begin::Label-->
                 <label class="fs-6 fw-semibold mb-2">
                   <span class="required">Email</span>
@@ -87,199 +454,58 @@
               </div>
               <!--end::Input group-->
 
+
+
+
+
+              
               <!--begin::Input group-->
-              <div class="fv-row mb-15">
+              <div class="fv-row mb-7">
                 <!--begin::Label-->
-                <label class="fs-6 fw-semibold mb-2">Description</label>
+                <label class="fs-6 fw-semibold mb-2">
+                  <span class="required">Mot de passe à affecter (pourra etre changé par l'employé)</span>
+
+                  <i
+                    class="fas fa-exclamation-circle ms-1 fs-7"
+                    data-bs-toggle="tooltip"
+                    title="au moins 8 caracteres"
+                  ></i>
+                </label>
                 <!--end::Label-->
 
                 <!--begin::Input-->
-                <el-form-item prop="description">
-                  <el-input v-model="formData.description" type="text" />
+                <el-form-item prop="mdp">
+                  <el-input v-model="formData.mdp" />
                 </el-form-item>
                 <!--end::Input-->
               </div>
               <!--end::Input group-->
 
-              <!--begin::Billing toggle-->
-              <div
-                class="fw-bold fs-3 rotate collapsible mb-7"
-                data-bs-toggle="collapse"
-                href="#kt_modal_add_customer_billing_info"
-                role="button"
-                aria-expanded="false"
-                aria-controls="kt_customer_view_details"
-              >
-                Shipping Information
-                <span class="ms-2 rotate-180">
-                  <KTIcon icon-name="down" icon-class="fs-3" />
-                </span>
-              </div>
-              <!--end::Billing toggle-->
 
-              <!--begin::Billing form-->
-              <div
-                id="kt_modal_add_customer_billing_info"
-                class="collapse show"
-              >
+
+
+
                 <!--begin::Input group-->
                 <div class="d-flex flex-column mb-7 fv-row">
                   <!--begin::Label-->
                   <label class="required fs-6 fw-semibold mb-2"
-                    >Address Line 1</label
+                    >Addresse</label
                   >
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <el-form-item prop="addressLine">
-                    <el-input v-model="formData.addressLine" />
+                  <el-form-item prop="addresse">
+                    <el-input v-model="formData.addresse" />
                   </el-form-item>
                   <!--end::Input-->
                 </div>
                 <!--end::Input group-->
 
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semibold mb-2">Address Line 2</label>
-                  <!--end::Label-->
 
-                  <!--begin::Input-->
-                  <el-input v-model="formData.addressLine2" />
-                  <!--end::Input-->
-                </div>
-                <!--end::Input group-->
 
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                  <!--begin::Label-->
-                  <label class="required fs-6 fw-semibold mb-2">Town</label>
-                  <!--end::Label-->
 
-                  <!--begin::Input-->
-                  <el-form-item prop="town">
-                    <el-input v-model="formData.town" />
-                  </el-form-item>
-                  <!--end::Input-->
-                </div>
-                <!--end::Input group-->
+                
 
-                <!--begin::Input group-->
-                <div class="row g-9 mb-7">
-                  <!--begin::Col-->
-                  <div class="col-md-6 fv-row">
-                    <!--begin::Label-->
-                    <label class="required fs-6 fw-semibold mb-2"
-                      >State / Province</label
-                    >
-                    <!--end::Label-->
-
-                    <!--begin::Input-->
-                    <el-form-item prop="state">
-                      <el-input v-model="formData.state" />
-                    </el-form-item>
-                    <!--end::Input-->
-                  </div>
-                  <!--end::Col-->
-
-                  <!--begin::Col-->
-                  <div class="col-md-6 fv-row">
-                    <!--begin::Label-->
-                    <label class="required fs-6 fw-semibold mb-2"
-                      >Post Code</label
-                    >
-                    <!--end::Label-->
-
-                    <!--begin::Input-->
-                    <el-form-item prop="postCode">
-                      <el-input v-model="formData.postCode" />
-                    </el-form-item>
-                    <!--end::Input-->
-                  </div>
-                  <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                  <!--begin::Label-->
-                  <label class="fs-6 fw-semibold mb-2">
-                    <span class="required">Country</span>
-
-                    <i
-                      class="fas fa-exclamation-circle ms-1 fs-7"
-                      data-bs-toggle="tooltip"
-                      title="Country of origination"
-                    ></i>
-                  </label>
-                  <!--end::Label-->
-
-                  <!--begin::Input-->
-                  <el-select v-model="formData.country">
-                    <el-option value="">Select a Country...</el-option>
-                    <el-option
-                      v-for="(item, i) in countries"
-                      :key="`countries-select-option-${i}`"
-                      :value="item.code"
-                    >
-                      {{ item.name }}
-                    </el-option>
-                  </el-select>
-                  <!--end::Input-->
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Wrapper-->
-                  <div class="d-flex flex-stack">
-                    <!--begin::Label-->
-                    <div class="me-5">
-                      <!--begin::Label-->
-                      <label class="fs-6 fw-semibold"
-                        >Use as a billing adderess?</label
-                      >
-                      <!--end::Label-->
-
-                      <!--begin::Input-->
-                      <div class="fs-7 fw-semibold text-muted">
-                        If you need more info, please check budget planning
-                      </div>
-                      <!--end::Input-->
-                    </div>
-                    <!--end::Label-->
-
-                    <!--begin::Switch-->
-                    <label
-                      class="form-check form-switch form-check-custom form-check-solid"
-                    >
-                      <!--begin::Input-->
-                      <input
-                        class="form-check-input"
-                        name="billing"
-                        type="checkbox"
-                        value="1"
-                        id="kt_modal_add_customer_billing"
-                        checked
-                      />
-                      <!--end::Input-->
-
-                      <!--begin::Label-->
-                      <span
-                        class="form-check-label fw-semibold text-muted"
-                        for="kt_modal_add_customer_billing"
-                      >
-                        Yes
-                      </span>
-                      <!--end::Label-->
-                    </label>
-                    <!--end::Switch-->
-                  </div>
-                  <!--begin::Wrapper-->
-                </div>
-                <!--end::Input group-->
-              </div>
-              <!--end::Billing form-->
             </div>
             <!--end::Scroll-->
           </div>
@@ -331,6 +557,31 @@ import { hideModal } from "@/core/helpers/modal";
 import { countries } from "@/core/data/countries";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
+
+interface NewformData {
+  name: string;
+  prenom: string;
+  nameAr: string;
+  prenomAr: string;
+  ndjf: string;
+  ndjfAr: string;
+  ddn:Date;
+  ldn: string;
+  country: string;
+  sexe: string;
+  equipe: string;
+  poste: string;
+  sf: string;
+  ne: string;
+  tel: string;
+  email: string;
+  mdp: string;
+  addresse: string;
+
+  }
+
+
+
 export default defineComponent({
   name: "add-customer-modal",
   components: {},
@@ -338,26 +589,142 @@ export default defineComponent({
     const formRef = ref<null | HTMLFormElement>(null);
     const addCustomerModalRef = ref<null | HTMLElement>(null);
     const loading = ref<boolean>(false);
-    const formData = ref({
-      name: "Sean Bean",
-      email: "sean@dellito.com",
-      description: "",
-      addressLine: "101, Collins Street",
-      addressLine2: "",
-      town: "Melbourne",
-      state: "Victoria",
-      postCode: "3000",
-      country: "US",
+    const formData = ref<NewformData>({
+      name: "",
+      prenom: "",
+      nameAr: "",
+      prenomAr: "",
+      ndjf: "",
+      ndjfAr: "",
+      ddn: new Date(),
+      ldn: "",
+      country: "",
+      sexe: "",
+      equipe: "",
+      poste: "",
+      sf: "",
+      ne: "",
+      tel: "",
+      email: "",
+      mdp: "",
+      addresse: "",
+
     });
 
     const rules = ref({
       name: [
         {
           required: true,
-          message: "Customer name is required",
+          message: "Nom obligatoire",
           trigger: "change",
         },
       ],
+      prenom: [
+        {
+          required: true,
+          message: "Prenom obligatoire",
+          trigger: "change",
+        },
+      ],
+      nameAr: [
+        {
+          required: true,
+          message: "Nom Arabe obligatoire",
+          trigger: "change",
+        },
+      ],
+      prenomAr: [
+        {
+          required: true,
+          message: "Prenom Arabe obligatoire",
+          trigger: "change",
+        },
+      ],
+      ndjf: [
+        {
+          required: false,
+          message: "Nom de jeune fille obligatoire",
+          trigger: "change",
+        },
+      ],
+      ndjfAr: [
+        {
+          required: false,
+          message: "Nom de jeune fille Arabe obligatoire",
+          trigger: "change",
+        },
+      ],
+      ddn: [
+        {
+          required: true,
+          message: "Date de naissance obligatoire",
+          trigger: "change",
+        },
+      ],
+      ldn: [
+        {
+          required: true,
+          message: "Lieu de naissance obligatoire",
+          trigger: "change",
+        },
+      ],
+      country: [
+        {
+          required: true,
+          message: "Pays de naissance obligatoire",
+          trigger: "change",
+        },
+      ],
+      sexe: [
+        {
+          required: true,
+          message: "Sexe obligatoire",
+          trigger: "change",
+        },
+      ],
+      equipe: [
+        {
+          required: false,
+          message: "Equipe obligatoire",
+          trigger: "change",
+        },
+      ],
+      poste: [
+        {
+          required: true,
+          message: "Poste obligatoire",
+          trigger: "change",
+        },
+      ],
+      sf: [
+        {
+          required: true,
+          message: "Situation Familiale obligatoire",
+          trigger: "change",
+        },
+      ],
+      ne: [
+        {
+          required: true,
+          message: "Nombre d'enfants obligatoire",
+          trigger: "change",
+        },
+      ],
+      tel: [
+        {
+          required: true,
+          message: "Telephone obligatoire",
+          trigger: "change",
+        },
+      ],
+      mdp: [
+        {
+          required: true,
+          message: "Mot de passe obligatoire",
+          trigger: "change",
+        },
+      ],
+
       email: [
         {
           required: true,
@@ -365,34 +732,14 @@ export default defineComponent({
           trigger: "change",
         },
       ],
-      addressLine: [
+      addresse: [
         {
           required: true,
-          message: "Address 1 is required",
+          message: "Addresse obligatoire",
           trigger: "change",
         },
       ],
-      town: [
-        {
-          required: true,
-          message: "Town is required",
-          trigger: "change",
-        },
-      ],
-      state: [
-        {
-          required: true,
-          message: "State is required",
-          trigger: "change",
-        },
-      ],
-      postCode: [
-        {
-          required: true,
-          message: "Post code is required",
-          trigger: "change",
-        },
-      ],
+      
     });
 
     const submit = () => {
