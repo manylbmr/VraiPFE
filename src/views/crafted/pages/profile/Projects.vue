@@ -3,7 +3,7 @@
   <div class="d-flex flex-wrap flex-stack my-5">
     <!--begin::Heading-->
     <h2 class="fs-2 fw-semibold my-2">
-      Projects
+      Demandes des employés
       <span class="fs-6 text-gray-500 ms-1">by Status</span>
     </h2>
     <!--end::Heading-->
@@ -19,10 +19,10 @@
           data-hide-search="true"
           class="form-select form-select-white form-select-sm fw-bold w-125px"
         >
-          <option value="Active" selected>Active</option>
-          <option value="Approved">In Progress</option>
-          <option value="Declined">To Do</option>
-          <option value="In Progress">Completed</option>
+        <option value="Toutes" selected>Toutes</option>
+          <option value="Active" selected>Actives</option>
+         
+          <option value="In Progress">Traitées</option>
         </select>
         <!--end::Select-->
       </div>
@@ -37,9 +37,13 @@
     <!--begin::Col-->
     <div class="col-md-6 col-xl-4">
       <KTCard
-        :progress="50"
-        title="Fitnes App"
-        :icon="getAssetPath('media/svg/brand-logos/plurk.svg')"
+        
+        title="Demande de congé"
+        datedebut="15/05/2024"
+        DateFin="17/05/2024"
+        description="Congé annuel"
+        username="Pascal Bleu"
+        
         :users="users1"
       ></KTCard>
     </div>
@@ -48,118 +52,64 @@
     <!--begin::Col-->
     <div class="col-md-6 col-xl-4">
       <KTCard
-        status="Pending"
-        status-data-badge-color="badge-light"
-        :progress="30"
-        :icon="getAssetPath('media/svg/brand-logos/disqus.svg')"
-        title="Leaf CRM"
-        date="May 10, 2021"
-        budget="$36,400.00"
+        
+        title="Demande absence"
+        datedebut="15/05/2024"
+        DateFin="29/05/2024"
+        description="Maladie"
+        username="Max Smith"
+        
         :users="users2"
       ></KTCard>
     </div>
     <!--end::Col-->
 
-    <!--begin::Col-->
-    <div class="col-md-6 col-xl-4">
-      <KTCard
-        status="Completed"
-        status-data-badge-color="badge-light-success"
-        :progress="100"
-        :icon="getAssetPath('media/svg/brand-logos/figma-1.svg')"
-        title="Atica Banking"
-        date="Mar 14, 2021"
-        budget="$605,100.00"
-        :users="users3"
-      ></KTCard>
+     <!--begin::Col-->
+     <div class="col-md-6 col-xl-4">
+      <KTCardDoc
+        
+        title="Demande de document"
+       
+        description="Besoin de fiche de paye pour la banque"
+        username="Max Smith"
+        
+        :users="users2"
+      ></KTCardDoc>
     </div>
     <!--end::Col-->
 
-    <!--begin::Col-->
-    <div class="col-md-6 col-xl-4">
+
+     <!--begin::Col-->
+     <div class="col-md-6 col-xl-4">
       <KTCard
-        status="Pending"
-        :progress="60"
-        status-data-badge-color="badge-light"
-        :icon="getAssetPath('media/svg/brand-logos/sentry-3.svg')"
-        title="Finance Dispatch"
-        budget="$36,400.00"
+        
+        title="Demande absence"
+        datedebut="15/05/2024"
+        DateFin="29/05/2024"
+        description="Maladie"
+        username="Stan Smith"
+        
         :users="users4"
       ></KTCard>
     </div>
     <!--end::Col-->
 
-    <!--begin::Col-->
-    <div class="col-md-6 col-xl-4">
+     <!--begin::Col-->
+     <div class="col-md-6 col-xl-4">
       <KTCard
-        status="In Progress"
-        :progress="40"
-        :icon="getAssetPath('media/svg/brand-logos/xing-icon.svg')"
-        title="9 Degree"
-        date="May 10, 2021"
-        budget="$36,400.00"
-        :users="users5"
+        
+        title="Demande absence"
+        datedebut="15/05/2024"
+        DateFin="29/05/2024"
+        description="Maladie"
+        username="Salim Brabus"
+        
+        :users="users3"
       ></KTCard>
     </div>
     <!--end::Col-->
+    
 
-    <!--begin::Col-->
-    <div class="col-md-6 col-xl-4">
-      <KTCard
-        status="In Progress"
-        :progress="70"
-        :icon="getAssetPath('media/svg/brand-logos/tvit.svg')"
-        title="GoPro App"
-        date="May 10, 2021"
-        budget="$36,400.00"
-        :users="users6"
-      ></KTCard>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-md-6 col-xl-4">
-      <KTCard
-        status="In Progress"
-        :progress="30"
-        :icon="getAssetPath('media/svg/brand-logos/aven.svg')"
-        title="Buldozer CRM"
-        date="May 10, 2021"
-        budget="$36,400.00"
-        :users="users7"
-      ></KTCard>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-md-6 col-xl-4">
-      <KTCard
-        status="Overdue"
-        :progress="10"
-        status-data-badge-color="badge-light-danger"
-        :icon="getAssetPath('media/svg/brand-logos/treva.svg')"
-        title="Aviasales App"
-        date="May 10, 2021"
-        budget="$36,400.00"
-        :users="users8"
-      ></KTCard>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-md-6 col-xl-4">
-      <KTCard
-        status="Completed"
-        :progress="100"
-        status-data-badge-color="badge-light-success"
-        :icon="getAssetPath('media/svg/brand-logos/kanba.svg')"
-        title="Oppo CRM"
-        date="May 10, 2021"
-        budget="$36,400.00"
-        :users="users9"
-      ></KTCard>
-    </div>
-    <!--end::Row-->
 
     <!--begin::Pagination-->
     <div class="d-flex flex-stack flex-wrap pt-10">
@@ -210,33 +160,34 @@
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent } from "vue";
-import KTCard from "@/components/cards/Card1.vue";
+import KTCard from "@/components/cards/Card1RH.vue";
+import KTCardDoc from "@/components/cards/CardDocRH.vue";
+import KTCardChang from "@/components/cards/CardChangRH.vue";
+
 
 export default defineComponent({
   name: "profile-projects",
   components: {
-    KTCard,
+    KTCard, KTCardDoc, KTCardChang
   },
   setup() {
     const users1 = [
-      { name: "Emma Smith", src: getAssetPath("media/avatars/300-6.jpg") },
-      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      
       { name: "Susan Redwood", initials: "S", state: "primary" },
     ];
 
     const users2 = [
-      { name: "Alan Warden", initials: "A", state: "warning" },
+      
       { name: "Brian Cox", src: getAssetPath("media/avatars/300-5.jpg") },
     ];
 
     const users3 = [
       { name: "Mad Masy", src: getAssetPath("media/avatars/300-6.jpg") },
-      { name: "Cris Willson", src: getAssetPath("media/avatars/300-1.jpg") },
-      { name: "Mike Garcie", initials: "M", state: "info" },
+     
     ];
 
     const users4 = [
-      { name: "Nich Warden", initials: "N", state: "warning" },
+      
       { name: "Rob Otto", initials: "R", state: "success" },
     ];
 

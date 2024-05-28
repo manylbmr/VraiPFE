@@ -38,7 +38,7 @@
             <!--begin::Heading-->
             <div class="mb-13 text-center">
               <!--begin::Title-->
-              <h1 class="mb-3">formulaire de demande de congé</h1>
+              <h1 class="mb-3">Ajouter un employé</h1>
               <!--end::Title-->
 
              

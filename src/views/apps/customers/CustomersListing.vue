@@ -14,7 +14,7 @@
             v-model="search"
             @input="searchItems()"
             class="form-control form-control-solid w-250px ps-15"
-            placeholder="Search Customers"
+            placeholder="chercher employé"
           />
         </div>
         <!--end::Search-->
@@ -28,17 +28,7 @@
           class="d-flex justify-content-end"
           data-kt-customer-table-toolbar="base"
         >
-          <!--begin::Export-->
-          <button
-            type="button"
-            class="btn btn-light-primary me-3"
-            data-bs-toggle="modal"
-            data-bs-target="#kt_customers_export_modal"
-          >
-            <KTIcon icon-name="exit-up" icon-class="fs-2" />
-            Export
-          </button>
-          <!--end::Export-->
+         
           <!--begin::Add customer-->
           <button
             type="button"
@@ -47,7 +37,7 @@
             data-bs-target="#kt_modal_add_customer"
           >
             <KTIcon icon-name="plus" icon-class="fs-2" />
-            Add Customer
+            Ajouter employé
           </button>
           <!--end::Add customer-->
         </div>
@@ -113,16 +103,16 @@
             {{ customer.email }}
           </a>
         </template>
-        <template v-slot:company="{ row: customer }">
-          {{ customer.company }}
+        <template v-slot:equipe="{ row: customer }">
+          {{ customer.equipe }}
         </template>
-        <template v-slot:paymentMethod="{ row: customer }">
-          <img :src="customer.payment.icon" class="w-35px me-3" alt="" />{{
-            customer.payment.ccnumber
+        <template v-slot:poste="{ row: customer }">
+         {{
+            customer.poste
           }}
         </template>
-        <template v-slot:date="{ row: customer }">
-          {{ customer.date }}
+        <template v-slot:dateentree="{ row: customer }">
+          {{ customer.dateentree }}
         </template>
         <template v-slot:actions="{ row: customer }">
           <a
@@ -188,7 +178,7 @@ export default defineComponent({
   setup() {
     const tableHeader = ref([
       {
-        columnName: "Customer Name",
+        columnName: "Nom complet",
         columnLabel: "name",
         sortEnabled: true,
         columnWidth: 175,
@@ -200,20 +190,20 @@ export default defineComponent({
         columnWidth: 230,
       },
       {
-        columnName: "Company",
-        columnLabel: "company",
+        columnName: "Equipe",
+        columnLabel: "equipe",
         sortEnabled: true,
         columnWidth: 175,
       },
       {
-        columnName: "Payment Method",
-        columnLabel: "paymentMethod",
+        columnName: "poste",
+        columnLabel: "poste",
         sortEnabled: true,
         columnWidth: 175,
       },
       {
-        columnName: "Created Date",
-        columnLabel: "date",
+        columnName: "Date d'entrée",
+        columnLabel: "dateentree",
         sortEnabled: true,
         columnWidth: 225,
       },

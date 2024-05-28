@@ -13,6 +13,9 @@
               class="symbol symbol-35px symbol-circle"
               data-bs-toggle="tooltip"
               :title="user.title"
+              :datedebut="user.datedebut"
+              :DateFin="user.DateFin"
+              :description="user.description"
             >
               <img v-if="user.src" alt="Pic" :src="user.src" />
               <span
@@ -50,7 +53,7 @@
 
       <!--begin::Description-->
       <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">
-        {{ getDescription }}
+        {{ description }}
       </p>
       <!--end::Description-->
 
@@ -60,7 +63,7 @@
         <div
           class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3"
         >
-          <div class="fs-6 text-gray-800 fw-bold">{{ getDate }}</div>
+          <div class="fs-6 text-gray-800 fw-bold">{{ datedebut }}</div>
           <div class="fw-semibold text-gray-500">from</div>
         </div>
         <!--end::Due-->
@@ -69,7 +72,7 @@
         <div
           class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3"
         >
-          <div class="fs-6 text-gray-800 fw-bold">{{ getDateFin }}</div>
+          <div class="fs-6 text-gray-800 fw-bold">{{ DateFin }}</div>
           <div class="fw-semibold text-gray-500">to</div>
         </div>
         <!--end::DateFin-->
@@ -111,31 +114,11 @@
       <br>
      
 
-<!--begin::Link-->
-<button
-          class="btn btn-sm btn-light-primary fw-bold"
-          data-kt-drawer-toggle="true"
-          data-kt-drawer-target="#kt_drawer_chat"
-          @click="openDrawer()"
-        >
-         Accept
-        </button>
-        <!--end::Link-->
+
 
         <!--begin::Link-->
         <button
-          class="btn btn-sm btn-light-primary fw-bold"
-          data-kt-drawer-toggle="true"
-          data-kt-drawer-target="#kt_drawer_chat"
-          @click="openDrawer()"
-        >
-          Deny
-        </button>
-        <!--end::Link-->
-
-        <!--begin::Link-->
-        <button
-          class="btn btn-sm btn-light-primary fw-bold"
+          class="btn btn-sm btn-light fw-bold"
           data-kt-drawer-toggle="true"
           data-kt-drawer-target="#kt_drawer_chat"
           @click="openDrawer()"
@@ -187,25 +170,15 @@ export default defineComponent({
     users: Array as () => Array<any>,
   },
   setup(props) {
-    const getDescription = computed(() => {
-      return props.description
-        ? props.description
-        : "Pour mariage d'un proche";
-    });
+   
 
     const getUsername = computed(() => {
       return props.Username
         ? props.Username
-        : "Lebron James";
+        : "Max Smith";
     });
 
-    const getDate = computed(() => {
-      return props.date ? props.date : "Feb 21, 2021";
-    });
-
-    const getDateFin = computed(() => {
-      return props.DateFin ? props.DateFin : "Feb 25, 2021";
-    });
+   
 
     const getStatus = computed(() => {
       return props.status ? props.status : "In Progress";
@@ -222,10 +195,9 @@ export default defineComponent({
     });
 
     return {
-      getDescription,
+      
       getUsername,
-      getDate,
-      getDateFin,
+     
       getStatus,
       getStatusDataBadgeColor,
       getStatusDataColor,

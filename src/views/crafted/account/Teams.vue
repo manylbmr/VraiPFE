@@ -3,7 +3,7 @@
     <div class="d-flex flex-wrap flex-stack mb-6">
       <!--begin::Title-->
       <h3 class="fw-bold my-2">
-        My Team
+        Mon équipe
         <span class="fs-6 text-gray-400 fw-semibold ms-1">(29)</span>
       </h3>
       <!--end::Title-->
@@ -35,6 +35,27 @@
         position="Art Director at Novica Co."
         :Present="true"
         :avatar="getAssetPath('media/avatars/300-11.jpg')"
+        :present="true"
+      ></Card3>
+      <Card3
+        name="Richard Miller"
+        position="Ingenieur en SI"
+        :Present="true"
+        :avatar="getAssetPath('media/avatars/300-17.jpg')"
+        :present="true"
+      ></Card3>
+      <Card3
+        name="Radamel Falcao"
+        position="Data Analyst"
+        :Present="false"
+        :avatar="getAssetPath('media/avatars/300-2.jpg')"
+        :present="true"
+      ></Card3>
+      <Card3
+        name="Mustafa Amir"
+        position="Web Developer"
+        :Present="true"
+        :avatar="getAssetPath('media/avatars/300-12.jpg')"
         :present="true"
       ></Card3>
   

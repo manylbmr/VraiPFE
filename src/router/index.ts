@@ -130,7 +130,7 @@ const routes: Array<RouteRecordRaw> = [
             name: "account-overview",
             component: () => import("@/views/crafted/account/Overview.vue"),
             meta: {
-              pageTitle: "Overview",
+              pageTitle: "Profile",
             },
           },
           {
@@ -138,7 +138,7 @@ const routes: Array<RouteRecordRaw> = [
             name: "account-settings",
             component: () => import("@/views/crafted/account/Settings.vue"),
             meta: {
-              pageTitle: "Settings",
+              pageTitle: "modifier profile",
             },
           },
           {
@@ -146,7 +146,7 @@ const routes: Array<RouteRecordRaw> = [
             name: "team",
             component: () => import("@/views/crafted/account/Teams.vue"),
             meta: {
-              pageTitle: "Team",
+              pageTitle: "Equipe",
             },
           },
           {
@@ -154,7 +154,7 @@ const routes: Array<RouteRecordRaw> = [
             name: "history",
             component: () => import("@/views/crafted/account/Historique.vue"),
             meta: {
-              pageTitle: "history",
+              pageTitle: "historique",
             },
           },
         ],
@@ -173,7 +173,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "apps-customers-listing",
         component: () => import("@/views/apps/customers/CustomersListing.vue"),
         meta: {
-          pageTitle: "Customers Listing",
+          pageTitle: "Liste des employés",
           breadcrumbs: ["Apps", "Customers"],
         },
       },
@@ -182,7 +182,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "apps-customers-details",
         component: () => import("@/views/apps/customers/CustomerDetails.vue"),
         meta: {
-          pageTitle: "Customers Details",
+          pageTitle: "Profile employé",
           breadcrumbs: ["Apps", "Customers"],
         },
       },

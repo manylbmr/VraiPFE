@@ -47,7 +47,7 @@
                   class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2"
                 >
                   <KTIcon icon-name="profile-circle" icon-class="fs-4 me-1" />
-                  Developer info
+                  Developpeur web
                 </a>
                 <a
                   href="#"
@@ -69,7 +69,7 @@
                 >
                   <KTIcon icon-name="briefcase" icon-class="ki-duotone ki-
                             briefcase   " />
-                  departement developpement
+                  département developpement
                 </a>
               </div>
               <!--end::Info-->
@@ -167,7 +167,7 @@
               class="nav-link text-active-primary me-6"
               active-class="active"
             >
-              Personal informations
+              Informations personnelles
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -178,17 +178,7 @@
               class="nav-link text-active-primary me-6"
               active-class="active"
             >
-              Edit personal informations
-            </router-link>
-          </li>
-
-          <li class="nav-item">
-            <router-link
-              to="/crafted/account/teams"
-              class="nav-link text-active-primary me-6"
-              active-class="active"
-            >
-              Team
+              Changer informations personnelles
             </router-link>
           </li>
 
@@ -198,9 +188,21 @@
               class="nav-link text-active-primary me-6"
               active-class="active"
             >
-              demands history
+             Historique des demandes
             </router-link>
           </li>
+
+          <li class="nav-item">
+            <router-link
+              to="/crafted/account/teams"
+              class="nav-link text-active-primary me-6"
+              active-class="active"
+            >
+              Equipe
+            </router-link>
+          </li>
+
+          
           
           <!--end::Nav item-->
         </ul>

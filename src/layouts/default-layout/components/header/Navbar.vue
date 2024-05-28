@@ -6,18 +6,7 @@
       <KTSearch />
     </div>
     <!--end::Search-->
-    <!--begin::Activities-->
-    <div class="app-navbar-item ms-1 ms-md-4">
-      <!--begin::Drawer toggle-->
-      <div
-        class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px"
-        id="kt_activities_toggle"
-      >
-        <KTIcon icon-name="messages" icon-class="fs-2" />
-      </div>
-      <!--end::Drawer toggle-->
-    </div>
-    <!--end::Activities-->
+    
     <!--begin::Notifications-->
     <div class="app-navbar-item ms-1 ms-md-4">
       <!--begin::Menu- wrapper-->

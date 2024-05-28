@@ -17,15 +17,7 @@
 
       <!--begin::Footer-->
       <div class="d-flex flex-center flex-wrap px-5">
-        <!--begin::Links-->
-        <div class="d-flex fw-semibold text-primary fs-base">
-          <a href="#" class="px-5" target="_blank">Terms</a>
-
-          <a href="#" class="px-5" target="_blank">Plans</a>
-
-          <a href="#" class="px-5" target="_blank">Contact Us</a>
-        </div>
-        <!--end::Links-->
+       
       </div>
       <!--end::Footer-->
     </div>
@@ -46,45 +38,15 @@
         <router-link to="/" class="mb-0 mb-lg-12">
           <img
             alt="Logo"
-            :src="getAssetPath('media/logos/custom-1.png')"
+            :src="getAssetPath('media/logos/logo.png')"
             class="h-60px h-lg-75px"
           />
         </router-link>
         <!--end::Logo-->
 
-        <!--begin::Image-->
-        <img
-          class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20"
-          :src="getAssetPath('media/misc/auth-screens.png')"
-          alt=""
-        />
-        <!--end::Image-->
+       
 
-        <!--begin::Title-->
-        <h1
-          class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7"
-        >
-          Fast, Efficient and Productive
-        </h1>
-        <!--end::Title-->
-
-        <!--begin::Text-->
-        <div class="d-none d-lg-block text-white fs-base text-center">
-          In this kind of post,
-          <a href="#" class="opacity-75-hover text-warning fw-bold me-1"
-            >the blogger</a
-          >
-
-          introduces a person they’ve interviewed <br />
-          and provides some background information about
-
-          <a href="#" class="opacity-75-hover text-warning fw-bold me-1"
-            >the interviewee</a
-          >
-          and their <br />
-          work following this is a transcript of the interview.
-        </div>
-        <!--end::Text-->
+        
       </div>
       <!--end::Content-->
     </div>

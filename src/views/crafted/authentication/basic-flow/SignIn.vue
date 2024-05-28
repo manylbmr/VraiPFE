@@ -12,7 +12,7 @@
       <!--begin::Heading-->
       <div class="text-center mb-10">
         <!--begin::Title-->
-        <h1 class="text-gray-900 mb-3">Sign In</h1>
+        <h1 class="text-gray-900 mb-3">Connexion</h1>
         <!--end::Title-->
 
         <!--begin::Link-->
@@ -27,12 +27,6 @@
       </div>
       <!--begin::Heading-->
 
-      <div class="mb-10 bg-light-info p-8 rounded">
-        <div class="text-info">
-          Use account <strong>admin@demo.com</strong> and password
-          <strong>demo</strong> to continue.
-        </div>
-      </div>
 
       <!--begin::Input group-->
       <div class="fv-row mb-10">
@@ -63,7 +57,7 @@
         <div class="d-flex flex-stack mb-2">
           <!--begin::Label-->
           <label class="form-label fw-bold text-gray-900 fs-6 mb-0"
-            >Password</label
+            >Mot de passe</label
           >
           <!--end::Label-->
 
@@ -102,7 +96,7 @@
           id="kt_sign_in_submit"
           class="btn btn-lg btn-primary w-100 mb-5"
         >
-          <span class="indicator-label"> Continue </span>
+          <span class="indicator-label"> Continuer </span>
 
           <span class="indicator-progress">
             Please wait...

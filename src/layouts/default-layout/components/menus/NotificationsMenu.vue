@@ -26,27 +26,10 @@
             class="nav-link text-white opacity-75 opacity-state-100 pb-4"
             data-bs-toggle="tab"
             href="#kt_topbar_notifications_1"
-            >Alerts</a
+            >Alertes</a
           >
         </li>
 
-        <li class="nav-item">
-          <a
-            class="nav-link text-white opacity-75 opacity-state-100 pb-4 active"
-            data-bs-toggle="tab"
-            href="#kt_topbar_notifications_2"
-            >Updates</a
-          >
-        </li>
-
-        <li class="nav-item">
-          <a
-            class="nav-link text-white opacity-75 opacity-state-100 pb-4"
-            data-bs-toggle="tab"
-            href="#kt_topbar_notifications_3"
-            >Logs</a
-          >
-        </li>
       </ul>
       <!--end::Tabs-->
     </div>
@@ -100,7 +83,7 @@
 
         <!--begin::View more-->
         <div class="py-3 text-center border-top">
-          <a href="#" class="btn btn-color-gray-600 btn-active-color-primary">
+          <a href="C:\Users\bouma\Documents\GitHub\VraiPFE\src\views\crafted\account\Historique.vue" class="btn btn-color-gray-600 btn-active-color-primary">
             View All
             <KTIcon icon-name="arrow-right" icon-class="fs-5" />
           </a>

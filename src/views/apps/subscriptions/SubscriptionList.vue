@@ -23,7 +23,7 @@
         <!--end::Search-->
       </div>
       <!--begin::Card title-->
-
+      <AddCustomerModal></AddCustomerModal>
       <!--begin::Card toolbar-->
       <div class="card-toolbar">
         <!--begin::Toolbar-->
@@ -32,17 +32,7 @@
           class="d-flex justify-content-end"
           data-kt-subscription-table-toolbar="base"
         >
-          <!--begin::Export-->
-          <button
-            type="button"
-            class="btn btn-light-primary me-3"
-            data-bs-toggle="modal"
-            data-bs-target="#kt_subscriptions_export_modal"
-          >
-            <KTIcon icon-name="exit-up" icon-class="fs-2" />
-            Export
-          </button>
-          <!--end::Export-->
+        
 
           <!--begin::Add subscription-->
           <router-link
@@ -50,7 +40,7 @@
             class="btn btn-primary"
           >
             <KTIcon icon-name="plus" icon-class="fs-2" />
-            Add Subscription
+            Ajouter employé
           </router-link>
           <!--end::Add subscription-->
         </div>
@@ -159,6 +149,7 @@ import KTDatatable from "@/components/kt-datatable/KTDataTable.vue";
 import type { Sort } from "@/components/kt-datatable/table-partials/models";
 import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
+import AddCustomerModal from "@/components/modals/forms/AddCustomerModal.vue";
 
 interface ISubscription {
   id: number;
@@ -173,7 +164,7 @@ interface ISubscription {
 export default defineComponent({
   name: "kt-subscription-list",
   components: {
-    KTDatatable,
+    KTDatatable, AddCustomerModal
   },
   setup() {
     const data = ref<Array<ISubscription>>([
