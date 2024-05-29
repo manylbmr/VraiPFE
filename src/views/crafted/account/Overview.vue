@@ -276,6 +276,7 @@ import KTChartWidget1 from "@/components/widgets/charts/Widget1.vue";
 import KTListWidget5 from "@/components/widgets/lists/Widget5.vue";
 import KTTableWidget5 from "@/components/widgets/tables/Widget5.vue";
 import KTListWidget1 from "@/components/widgets/lists/Widget1.vue";
+import ApiService from "@/core/services/ApiService";
 
 export default defineComponent({
   name: "account-overview",
@@ -286,9 +287,27 @@ export default defineComponent({
     KTListWidget1,
   },
   setup() {
+    // let id = {id: 555};
+    ApiService.setHeader();
+    ApiService.post("Employee/GetMe", {}).then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.log(error);
+    });
+
     return {
       getAssetPath,
     };
   },
+  mouted()
+  {
+    // ApiService.setHeader();
+    // let id = "555";
+    // ApiService.get("Employee/GetByID", id).then((response) => {
+    //   console.log(response.data);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+  }
 });
 </script>

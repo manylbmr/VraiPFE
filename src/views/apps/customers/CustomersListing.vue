@@ -163,8 +163,8 @@ import Datatable from "@/components/kt-datatable/KTDataTable.vue";
 import type { Sort } from "@/components/kt-datatable//table-partials/models";
 import ExportCustomerModal from "@/components/modals/forms/ExportCustomerModal.vue";
 import AddCustomerModal from "@/components/modals/forms/AddCustomerModal.vue";
-import type { ICustomer } from "@/core/data/customers";
-import customers from "@/core/data/customers";
+import { fetchCustomers, type ICustomer } from "@/core/data/customers";
+// import customers from "@/core/data/customers";
 import arraySort from "array-sort";
 import { MenuComponent } from "@/assets/ts/components";
 
@@ -216,11 +216,14 @@ export default defineComponent({
     ]);
     const selectedIds = ref<Array<number>>([]);
 
-    const tableData = ref<Array<ICustomer>>(customers);
+    const tableData =ref<Array<ICustomer>>([]);
+    //ref<Array<ICustomer>>(customers);
     const initCustomers = ref<Array<ICustomer>>([]);
 
-    onMounted(() => {
-      initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
+    onMounted(async () => {
+      const customers = await fetchCustomers();
+      tableData.value = customers;
+      // initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
     });
 
     const deleteFewCustomers = () => {

@@ -9,6 +9,10 @@ export interface User {
   email: string;
   password: string;
   api_token: string;
+  // tokenType: string;
+  // accessToken: string;
+  // expiresIn: number;
+  // refreshToken: string;
 }
 
 export const useAuthStore = defineStore("auth", () => {
@@ -35,7 +39,7 @@ export const useAuthStore = defineStore("auth", () => {
   }
 
   function login(credentials: User) {
-    return ApiService.post("login", credentials)
+    return ApiService.post("api/LoginPFE/login", credentials)
       .then(({ data }) => {
         setAuth(data);
       })
@@ -69,19 +73,19 @@ export const useAuthStore = defineStore("auth", () => {
   }
 
   function verifyAuth() {
-    if (JwtService.getToken()) {
-      ApiService.setHeader();
-      ApiService.post("verify_token", { api_token: JwtService.getToken() })
-        .then(({ data }) => {
-          setAuth(data);
-        })
-        .catch(({ response }) => {
-          setError(response.data.errors);
-          purgeAuth();
-        });
-    } else {
-      purgeAuth();
-    }
+    // if (JwtService.getToken()) {
+    //   ApiService.setHeader();
+    //   ApiService.post("api/LoginPFE/verify_token", { api_token: JwtService.getToken() })
+    //     .then(({ data }) => {
+    //       setAuth(data);
+    //     })
+    //     .catch(({ response }) => {
+    //       setError(response.data.errors);
+    //       purgeAuth();
+    //     });
+    // } else {
+    //   purgeAuth();
+    // }
   }
 
   return {

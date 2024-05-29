@@ -1,7 +1,7 @@
 import { getAssetPath } from "@/core/helpers/assets";
+import ApiService from "../services/ApiService";
 
-interface ICustomer {
-  id: number;
+interface ICustomer {id: number;
   name: string;
   email: string;
   equipe: string;
@@ -18,177 +18,35 @@ interface ICustomer {
   nombreEnfants: string;
   adresse: string;
   telephone: string;
-  nationalite: string;
+  nationalite: string;}
 
+function fromAPI(data: any): ICustomer { return {
+  id: data.matricule,
+  name: data.nom,
+  email: data.email,
+  equipe: data.idEquipe.toString(),
+  dateentree: data.dateEntre,
+  poste: data.titre.toString(),
+  image: data.linkToPhoto,
+  nameAr: data.nomArabe,
+  maidenName: data.nomJeuneFille,
+  maidenNameAr: data.nomJeuneFilleArabe,
+  dateNaissance: data.dateNaissance,
+  lieuNaissance: data.lieuNaissance,
+  Sexe: data.sexe.toString(),
+  situationFamiliale: data.situationFamiliale.toString(),
+  nombreEnfants: data.nbEnfant?.toString() || "0",
+  adresse: `${data.communeNaissance}, ${data.wilayaNaissance}, ${data.paysNaissance}`,
+  telephone: "",
+  nationalite: data.nationalites,
+};}
 
-  
+ApiService.setHeader();
+
+export function fetchCustomers(): Promise<ICustomer[]> {
+  return ApiService.get("Employee/GetEmployees").then((response) => {
+    return response.data.map(fromAPI);
+  });
 }
 
-const customers: Array<ICustomer> = [
-  {
-    id: Math.floor(Math.random() * 99999) + 1,
-    name: "Max Smith",
-    email: "m.smith@kpmg.com.au",
-    equipe: "département developpement",
-    dateentree: "12/11/2020",
-    poste: "developpeur",
-    image: getAssetPath("media/users/300_1.jpg"),
-    nameAr: "ماكس سميث",
-    maidenName: "Max Smith",
-    maidenNameAr: "ماكس سميث",
-    dateNaissance: "12/11/1990",
-    lieuNaissance: "Paris",
-    Sexe: "Homme",
-    situationFamiliale: "Célibataire",
-    nombreEnfants: "0",
-    adresse: "Paris",
-    telephone: "0600000000",
-    nationalite: "Française",
-   
-  },
-  {
-    id: Math.floor(Math.random() * 99999) + 1,
-    name: "Manyl Bouammar",
-    email: "mbmr@kpmg.com.au",
-    equipe: "département Comptabilité",
-    dateentree: "23/09/2019",
-    poste: "comptable",
-    image: getAssetPath("media/users/300_1.jpg"),
-    nameAr: "ماكس سميث",
-    maidenName: "Max Smith",
-    maidenNameAr: "ماكس سميث",
-    dateNaissance: "12/11/1990",
-    lieuNaissance: "Paris",
-    Sexe: "Homme",
-    situationFamiliale: "Célibataire",
-    nombreEnfants: "0",
-    adresse: "Paris",
-    telephone: "0600000000",
-    nationalite: "Française",
-  },
-  {
-    id: Math.floor(Math.random() * 99999) + 1,
-    name: "abdou lemmouchi",
-    email: "alm@kpmg.com.au",
-    equipe: "département developpement",
-    dateentree: "03/02/2013",
-    poste: "developpeur",
-    image: getAssetPath("media/users/300_1.jpg"),
-    nameAr: "ماكس سميث",
-    maidenName: "Max Smith",
-    maidenNameAr: "ماكس سميث",
-    dateNaissance: "12/11/1990",
-    lieuNaissance: "Paris",
-    Sexe: "Homme",
-    situationFamiliale: "Célibataire",
-    nombreEnfants: "0",
-    adresse: "Paris",
-    telephone: "0600000000",
-    nationalite: "Française",
-  },
-  {
-    id: Math.floor(Math.random() * 99999) + 1,
-    name: "Max Smith",
-    email: "m.smith@kpmg.com.au",
-    equipe: "département developpement",
-    dateentree: "12 Nov 2020, 2:01 pm",
-    poste: "developpeur",
-    image: getAssetPath("media/users/300_1.jpg"),
-    nameAr: "ماكس سميث",
-    maidenName: "Max Smith",
-    maidenNameAr: "ماكس سميث",
-    dateNaissance: "12/11/1990",
-    lieuNaissance: "Paris",
-    Sexe: "Homme",
-    situationFamiliale: "Célibataire",
-    nombreEnfants: "0",
-    adresse: "Paris",
-    telephone: "0600000000",
-    nationalite: "Française",
-  },
-  {
-    id: Math.floor(Math.random() * 99999) + 1,
-    name: "Max Smith",
-    email: "m.smith@kpmg.com.au",
-    equipe: "département developpement",
-    dateentree: "12 Nov 2020, 2:01 pm",
-    poste: "developpeur",
-    image: getAssetPath("media/users/300_1.jpg"),
-    nameAr: "ماكس سميث",
-    maidenName: "Max Smith",
-    maidenNameAr: "ماكس سميث",
-    dateNaissance: "12/11/1990",
-    lieuNaissance: "Paris",
-    Sexe: "Homme",
-    situationFamiliale: "Célibataire",
-    nombreEnfants: "0",
-    adresse: "Paris",
-    telephone: "0600000000",
-    nationalite: "Française",
-  },
-  {
-    id: Math.floor(Math.random() * 99999) + 1,
-    name: "Max Smith",
-    email: "m.smith@kpmg.com.au",
-    equipe: "département developpement",
-    dateentree: "12 Nov 2020, 2:01 pm",
-    poste: "developpeur",
-    image: getAssetPath("media/users/300_1.jpg"),
-    nameAr: "ماكس سميث",
-    maidenName: "Max Smith",
-    maidenNameAr: "ماكس سميث",
-    dateNaissance: "12/11/1990",
-    lieuNaissance: "Paris",
-    Sexe: "Homme",
-    situationFamiliale: "Célibataire",
-    nombreEnfants: "0",
-    adresse: "Paris",
-    telephone: "0600000000",
-    nationalite: "Française",
-  },
-  {
-    id: Math.floor(Math.random() * 99999) + 1,
-    name: "Max Smith",
-    email: "m.smith@kpmg.com.au",
-    equipe: "département developpement",
-    dateentree: "12 Nov 2020, 2:01 pm",
-    poste: "developpeur",
-    image: getAssetPath("media/users/300_1.jpg"),
-    nameAr: "ماكس سميث",
-    maidenName: "Max Smith",
-    maidenNameAr: "ماكس سميث",
-    dateNaissance: "12/11/1990",
-    lieuNaissance: "Paris",
-    Sexe: "Homme",
-    situationFamiliale: "Célibataire",
-    nombreEnfants: "0",
-    adresse: "Paris",
-    telephone: "0600000000",
-    nationalite: "Française",
-  },
-  {
-    id: Math.floor(Math.random() * 99999) + 1,
-    name: "Max Smith",
-    email: "m.smith@kpmg.com.au",
-    equipe: "département developpement",
-    dateentree: "12 Nov 2020, 2:01 pm",
-    poste: "developpeur",
-    image: getAssetPath("media/users/300_1.jpg"),
-    nameAr: "ماكس سميث",
-    maidenName: "Max Smith",
-    maidenNameAr: "ماكس سميث",
-    dateNaissance: "12/11/1990",
-    lieuNaissance: "Paris",
-    Sexe: "Homme",
-    situationFamiliale: "Célibataire",
-    nombreEnfants: "0",
-    adresse: "Paris",
-    telephone: "0600000000",
-    nationalite: "Française",
-  },
- 
-];
-
 export type { ICustomer };
-
-export default customers;
