@@ -5,7 +5,7 @@
     <div class="card-header border-0">
       <!--begin::Card title-->
       <div class="card-title">
-        <h2>Payment Records</h2>
+        <h2></h2>
       </div>
       <!--end::Card title-->
 
@@ -19,7 +19,7 @@
           data-bs-target="#kt_modal_add_payment"
         >
           <KTIcon icon-name="plus-square" icon-class="fs-3" />
-          Add payment
+          Rate
         </button>
         <!--end::Filter-->
       </div>
@@ -35,16 +35,25 @@
         :items-per-page="5"
         :items-per-page-dropdown-enabled="false"
       >
-        <template v-slot:invoice="{ row: payment }">
-          {{ payment.invoice }}
+        <template v-slot:Titre="{ row: payment }">
+          {{ payment.Titre }}
         </template>
         <template v-slot:status="{ row: payment }">
           <span :class="`badge badge-light-${payment.status.state}`">{{
             payment.status.label
           }}</span>
         </template>
-        <template v-slot:amount="{ row: payment }">
-          {{ payment.amount }}
+        <template v-slot:datedébut="{ row: payment }">
+          {{ payment.datedébut }}
+        </template>
+        <template v-slot:datefin="{ row: payment }">
+          {{ payment.datefin }}
+        </template>
+        <template v-slot:description="{ row: payment }">
+          {{ payment.description }}
+        </template>
+        <template v-slot:traiteepar="{ row: payment }">
+          {{ payment.traiteepar }}
         </template>
         <template v-slot:date="{ row: payment }">
           {{ payment.date }}
@@ -106,8 +115,8 @@ export default defineComponent({
   setup() {
     const tableHeader = ref([
       {
-        columnName: "Invoice No.",
-        columnLabel: "invoice",
+        columnName: "Titre",
+        columnLabel: "Titre",
         sortEnabled: false,
       },
       {
@@ -116,223 +125,54 @@ export default defineComponent({
         sortingField: "status.label",
         sortEnabled: false,
       },
+     
       {
-        columnName: "Amount",
-        columnLabel: "amount",
-        sortEnabled: false,
-      },
-      {
-        columnName: "Date",
+        columnName: "Date d'envoi",
         columnLabel: "date",
         sortEnabled: false,
       },
       {
-        columnName: "Actions",
-        columnLabel: "actions",
+        columnName: "Date début",
+        columnLabel: "datedébut",
         sortEnabled: false,
       },
+      {
+        columnName: "Date fin",
+        columnLabel: "datefin",
+        sortEnabled: false,
+      },
+      {
+        columnName: "Description",
+        columnLabel: "description",
+        sortEnabled: false,
+      },
+      {
+        columnName: "Traitée par",
+        columnLabel: "traiteepar",
+        sortEnabled: false,
+      },
+    
     ]);
     const tableData = ref([
       {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Payment for invoice",
-        amount: "$880.00",
+        Titre: "Demande de congé",
+         
+        description: "Besoin d'un jour de congé pour des raisons personnelles",
+        date: "26/05/2024",
         status: {
           label: "Pending",
           state: "warning",
         },
-        date: "21 Oct 2020, 5:54 pm",
+        datedébut: "27/05/2024",
+        datefin: "28/05/2024",
+        traiteepar: "Mme. Aicha",
       },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Monthly utilites",
-        amount: "$7,650.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "19 Oct 2020, 7:32 am",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Payment for invoice",
-        amount: "$375.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "23 Sep 2020, 12:38 am",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Hosting Fees",
-        amount: "$129.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "11 Sep 2020, 3:18 pm",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Marketing automation",
-        amount: "$450.00",
-        status: {
-          label: "Rejected",
-          state: "danger",
-        },
-        date: "03 Sep 2020, 1:08 am",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Sales injection",
-        amount: "$8,700.00",
-        status: {
-          label: "Pending",
-          state: "warning",
-        },
-        date: "01 Sep 2020, 4:58 pm",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Payment for invoice",
-        amount: "$1,200.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "14 Dec 2020, 8:43 pm",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Google cloud subscription",
-        amount: "$79.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "01 Dec 2020, 10:12 am",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Capital investment",
-        amount: "$5,500.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "12 Nov 2020, 2:01 pm",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Payment for invoice",
-        amount: "$880.00",
-        status: {
-          label: "Pending",
-          state: "warning",
-        },
-        date: "21 Oct 2020, 5:54 pm",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Monthly utilites",
-        amount: "$7,650.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "19 Oct 2020, 7:32 am",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Payment for invoice",
-        amount: "$375.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "23 Sep 2020, 12:38 am",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Hosting Fees",
-        amount: "$129.00",
-        status: {
-          label: "Successful",
-          state: "success",
-        },
-        date: "11 Sep 2020, 3:18 pm",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Marketing automation",
-        amount: "$450.00",
-        status: {
-          label: "Rejected",
-          state: "danger",
-        },
-        date: "03 Sep 2020, 1:08 am",
-      },
-      {
-        invoice:
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
-          "-" +
-          Math.floor(Math.random() * (9999 - 1000 + 1) + 1000),
-        description: "Sales injection",
-        amount: "$8,700.00",
-        status: {
-          label: "Pending",
-          state: "warning",
-        },
-        date: "01 Sep 2020, 4:58 pm",
-      },
+     
     ]);
 
-    const deleteRecord = (invoice: string) => {
+    const deleteRecord = (Titre: string) => {
       for (let i = 0; i < tableData.value.length; i++) {
-        if (tableData.value[i].invoice === invoice) {
+        if (tableData.value[i].Titre === Titre) {
           tableData.value.splice(i, 1);
         }
       }

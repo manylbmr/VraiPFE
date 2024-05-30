@@ -18,17 +18,19 @@ const MainMenuConfig: Array<MenuItem> = [
     ],
   },
   {
-    heading: "craft",
+    heading: " ",
     route: "/crafted",
     pages: [
       {
-        sectionTitle: "pages",
+        sectionTitle: "Fonctionnalités",
         route: "/pages",
         keenthemesIcon: "element-plus",
         bootstrapIcon: "bi-archive",
         sub: [
+
+/*
           {
-            sectionTitle: "profile",
+            sectionTitle: "Profile",
             route: "/profile",
             sub: [
               {
@@ -57,6 +59,60 @@ const MainMenuConfig: Array<MenuItem> = [
               },
             ],
           },
+*/
+
+
+          {
+            sectionTitle: "Fonctionnalités RH",
+            route: "/RH",
+            sub: [
+              {
+                heading: "Liste employés",
+                route: "/crafted/RH/ListeEmp",
+              },
+              {
+                heading: "Liste équipes",
+                route: "/crafted/RH/ListeEquipe",
+              },
+              {
+                heading: "Demandes à traiter",
+                route: "/crafted/RH/DemandeTraiter",
+              },
+              {
+                heading: "Historique demandes",
+                route: "/crafted/RH/HistoriqueDemandes",
+              },
+              
+            ],
+          },
+
+
+
+
+          {
+            sectionTitle: "Fonctionnalités responsable",
+            route: "/Responsable",
+            sub: [
+              {
+                heading: "Equipe",
+                route: "/crafted/Responsable/Equipe",
+              },
+              {
+                heading: "Demandes à traiter",
+                route: "/crafted/Responsable/DemandeTraiter",
+              },
+              {
+                heading: "Historique demandes",
+                route: "/crafted/Responsable/HistoriqueDemandes",
+              },
+             
+            ],
+          },
+
+
+
+          
+/*
           {
             sectionTitle: "wizards",
             route: "/wizard",
@@ -71,24 +127,37 @@ const MainMenuConfig: Array<MenuItem> = [
               },
             ],
           },
+
+          */
         ],
       },
+
+
+
+
       {
-        sectionTitle: "account",
+        sectionTitle: "Compte",
         route: "/account",
         keenthemesIcon: "profile-circle",
         bootstrapIcon: "bi-person",
         sub: [
           {
-            heading: "accountOverview",
+            heading: "Profil",
             route: "/crafted/account/overview",
           },
           {
-            heading: "settings",
+            heading: "Modifier profil",
             route: "/crafted/account/settings",
+          },
+          {
+            heading: "Historique demandes",
+            route: "/crafted/account/history",
           },
         ],
       },
+
+
+
       {
         sectionTitle: "authentication",
         keenthemesIcon: "fingerprint-scanning",
@@ -125,6 +194,9 @@ const MainMenuConfig: Array<MenuItem> = [
           },
         ],
       },
+
+
+      /*
       {
         sectionTitle: "modals",
         route: "/modals",
@@ -153,6 +225,9 @@ const MainMenuConfig: Array<MenuItem> = [
               },
             ],
           },
+
+
+
           {
             sectionTitle: "forms",
             route: "/forms",
@@ -195,6 +270,7 @@ const MainMenuConfig: Array<MenuItem> = [
           },
         ],
       },
+      
       {
         sectionTitle: "widgets",
         route: "/widgets",
@@ -302,7 +378,7 @@ const MainMenuConfig: Array<MenuItem> = [
             route: "/apps/chat/drawer-chat",
           },
         ],
-      },
+      },*/
     ],
   },
 ];

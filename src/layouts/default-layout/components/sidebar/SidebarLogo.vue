@@ -9,7 +9,7 @@
           (themeMode === 'dark' && layout === 'light-sidebar')
         "
         alt="Logo"
-        :src="getAssetPath('media/logos/default-dark.svg')"
+        :src="getAssetPath('media/logos/logo.png')"
         class="h-25px app-sidebar-logo-default"
       />
       <img

@@ -192,7 +192,7 @@
             </router-link>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" v-if="state.isResponsable">
             <router-link
               to="/crafted/account/teams"
               class="nav-link text-active-primary me-6"
@@ -216,8 +216,9 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import Dropdown3 from "@/components/dropdown/Dropdown3.vue";
+import ApiService from "@/core/services/ApiService";
 
 export default defineComponent({
   name: "kt-account",
@@ -225,8 +226,18 @@ export default defineComponent({
     Dropdown3,
   },
   setup() {
+    const state = reactive({
+      isResponsable: false,
+    });
+    ApiService.setHeader();
+      ApiService.post("Employee/GetMe", {}).then((response) => {
+        state.isResponsable = response.data.isResponsable;
+        console.log(response.data.isResponsable);
+      });
+    // temp();
     return {
       getAssetPath,
+      state
     };
   },
 });

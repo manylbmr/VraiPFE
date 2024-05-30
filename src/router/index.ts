@@ -97,6 +97,109 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+
+
+
+
+      {
+        path: "/crafted/RH",
+        name: "RH",
+        
+        meta: {
+          breadcrumbs: ["Pages", "Profile"],
+        },
+        children: [
+          {
+            path: "ListeEmp",
+            name: "ListeEmp",
+            component: () =>
+              import("@/views/crafted/RH/ListeEmp.vue"),
+            meta: {
+              pageTitle: "Liste Employés",
+            },
+          },
+          {
+            path: "ListeEquipe",
+            name: "Liste Equipes",
+            component: () =>
+              import("@/views/crafted/RH/ListeEq.vue"),
+            meta: {
+              pageTitle: "Liste Equipes",
+            },
+          },
+          {
+            path: "DemandeTraiter",
+            name: "Demandes à Traiter",
+            component: () =>
+              import("@/views/crafted/RH/DemandesRH.vue"),
+            meta: {
+              pageTitle: "Demandes à traiter",
+            },
+          },
+          {
+            path: "Historiquedemandes",
+            name: "Historique des demandes",
+            component: () =>
+              import("@/views/crafted/RH/HistoriqueRH.vue"),
+            meta: {
+              pageTitle: "Historique des demandes",
+            },
+          },
+          
+         
+        ],
+      },
+
+
+
+
+
+      {
+        path: "/crafted/Responsable",  
+        name: "Resp",
+        
+        meta: {
+          breadcrumbs: ["Pages", "Profile"],
+        },
+        children: [
+          {
+            path: "Equipe",
+            name: "Equipe",
+            component: () =>
+              import("@/views/crafted/Responsable/Teams.vue"),
+            meta: {
+              pageTitle: "Equipe",
+            },
+          },
+          
+          {
+            path: "DemandeTraiter",
+            name: "Demandes à Traiter",
+            component: () =>
+              import("@/views/crafted/Responsable/DemandesResp.vue"),
+            meta: {
+              pageTitle: "Demandes à traiter",
+            },
+          },
+          {
+            path: "Historiquedemandes",
+            name: "Historique des demandes",
+            component: () =>
+              import("@/views/crafted/Responsable/HistoriqueResp.vue"),
+            meta: {
+              pageTitle: "Historique des demandes",
+            },
+          },
+          
+         
+        ],
+      },
+
+
+
+
+
+
       {
         path: "/crafted/pages/wizards/horizontal",
         name: "horizontal-wizard",
@@ -144,7 +247,7 @@ const routes: Array<RouteRecordRaw> = [
           {
             path: "teams",
             name: "team",
-            component: () => import("@/views/crafted/account/Teams.vue"),
+            component: () => import("@/views/crafted/Responsable/Teams.vue"),
             meta: {
               pageTitle: "Equipe",
             },
