@@ -27,7 +27,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">MS23DD1</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.matricule }}</span>
         </div>
         <!--end::Col-->
       </div>
@@ -41,7 +41,7 @@
         <!--begin::Col-->
         <div class="col-lg-8">
           <span class="fw-bold fs-6 text-gray-900" v-if="!loading">
-            {{ accountData.nom != null ? accountData.nom + " " + accountData.prenom : 'Max Smith'}}
+            {{ accountData.nom + " " + accountData.prenom + " " + (accountData.prenom2 != null ? accountData.prenom2 : "")}}
           </span>
         </div>
         <!--end::Col-->
@@ -55,12 +55,13 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.nomArabe + ' ' + accountData.prenomArabe }}</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.nomArabe + ' ' +
+            accountData.prenomArabe + " " + ((accountData.prenom2Arabe != null)? accountData.prenom2Arabe : "") }}</span>
         </div>
         <!--end::Col-->
       </div>
 
-      <div class="row mb-7" v-if="accountData.nomJeunefille != null">
+      <div class="row mb-7" v-if="!loading && accountData.nomJeunefille != null">
         <!--begin::Label-->
         <label class="col-lg-4 fw-semibold text-muted"> maiden name</label>
         <!--end::Label-->
@@ -72,7 +73,7 @@
         <!--end::Col-->
       </div>
 
-      <div class="row mb-7" v-if="accountData.nomJeunefilleArabe != null">
+      <div class="row mb-7" v-if="!loading && accountData.nomJeunefilleArabe != null">
         <!--begin::Label-->
         <label class="col-lg-4 fw-semibold text-muted"> maiden name arabic</label>
         <!--end::Label-->
@@ -103,7 +104,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">EL Biar</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.lieuNaissance + ', ' + accountData.communeNaissance + ", " + accountData.wilayaNaissance }}</span>
         </div>
         <!--end::Col-->
       </div>
@@ -115,7 +116,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">Algeria</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.paysNaissance }}</span>
         </div>
         <!--end::Col-->
       </div>
@@ -170,14 +171,14 @@
         <!--end::Col-->
       </div>
 
-      <div class="row mb-7">
+      <div class="row mb-7" v-if="!loading && accountData.nbEnfant != null">
         <!--begin::Label-->
         <label class="col-lg-4 fw-semibold text-muted">Children Number</label>
         <!--end::Label-->
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">2</span>
+          <span class="fw-bold fs-6 text-gray-900">{{ accountData.nbEnfant }}</span>
         </div>
         <!--end::Col-->
       </div>
@@ -189,29 +190,10 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">Algerian, French</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.nationalites }}</span>
         </div>
         <!--end::Col-->
       </div>
-
-      <!--begin::Input group-->
-      <div class="row mb-7">
-        <!--begin::Label-->
-        <label class="col-lg-4 fw-semibold text-muted">
-          Contact Phone
-          <i class="fas fa-exclamation-circle ms-1 fs-7" v-tooltip title="Phone number must be active"></i>
-        </label>
-        <!--end::Label-->
-
-        <!--begin::Col-->
-        <div class="col-lg-8 d-flex align-items-center">
-          <span class="fw-bold fs-6 me-2">044 3276 454 935</span>
-
-          <span class="badge badge-success">Verified</span>
-        </div>
-        <!--end::Col-->
-      </div>
-      <!--end::Input group-->
 
       <div class="row mb-7">
         <!--begin::Label-->
@@ -220,7 +202,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">25 days</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.reliquat }} Jours</span>
         </div>
         <!--end::Col-->
       </div>
@@ -232,27 +214,10 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">21/05/2023</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.dateEntre }}</span>
         </div>
         <!--end::Col-->
       </div>
-
-      <!--begin::Input group-->
-      <div class="row mb-7">
-        <!--begin::Label-->
-        <label class="col-lg-4 fw-semibold text-muted">Communication</label>
-        <!--end::Label-->
-
-        <!--begin::Col-->
-        <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">Email, Phone</span>
-        </div>
-        <!--end::Col-->
-      </div>
-      <!--end::Input group-->
-
-
-
     </div>
     <!--end::Card body-->
   </div>
@@ -270,7 +235,7 @@ import KTChartWidget1 from "@/components/widgets/charts/Widget1.vue";
 import KTListWidget5 from "@/components/widgets/lists/Widget5.vue";
 import KTTableWidget5 from "@/components/widgets/tables/Widget5.vue";
 import KTListWidget1 from "@/components/widgets/lists/Widget1.vue";
-import ApiService from "@/core/services/ApiService";
+// import ApiService from "@/core/services/ApiService";
 import { fetchMe } from "@/core/data/employee";
 
 export default defineComponent({
@@ -290,6 +255,40 @@ export default defineComponent({
     //   console.log(response);
     // });
 
+    //the json data structure
+    //     {
+    //     "matricule": "555",
+    //     "nss": "123456",
+    //     "nom": "LEMMOUCHI",
+    //     "prenom": "Abdou",
+    //     "prenom2": null,
+    //     "nomArabe": "لموشي",
+    //     "prenomArabe": "عبدالرحمن",
+    //     "prenom2Arabe": null,
+    //     "dateNaissance": "2002-10-27",
+    //     "nomJeuneFille": null,
+    //     "nomJeuneFilleArabe": null,
+    //     "lieuNaissance": "BEK",
+    //     "paysNaissance": "DZ",
+    //     "wilayaNaissance": "Alger",
+    //     "communeNaissance": "BEK",
+    //     "sexe": 0,
+    //     "titre": 0,
+    //     "situationFamiliale": 0,
+    //     "nationalites": "DZ",
+    //     "linkToPhoto": "",
+    //     "reliquat": 10,
+    //     "isResponsable": true,
+    //     "idEquipe": 12,
+    //     "idResponsable": null,
+    //     "dateEntre": "0001-01-01",
+    //     "dateSortie": null,
+    //     "nbAnneeExperienceInterne": 5,
+    //     "nbAnneeExperienceExterne": 5,
+    //     "nbEnfant": null,
+    //     "email": "abdou@gmail.com"
+    // }
+
     return {
       accountData,
       getAssetPath,
@@ -297,7 +296,7 @@ export default defineComponent({
     };
   },
   mounted() {
-      this.fetchMe();
+    this.fetchMe();
   },
   methods: {
     async fetchMe() {
