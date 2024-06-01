@@ -55,12 +55,12 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">ماكس سميث</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.nomArabe + ' ' + accountData.prenomArabe }}</span>
         </div>
         <!--end::Col-->
       </div>
 
-      <div class="row mb-7">
+      <div class="row mb-7" v-if="accountData.nomJeunefille != null">
         <!--begin::Label-->
         <label class="col-lg-4 fw-semibold text-muted"> maiden name</label>
         <!--end::Label-->
@@ -72,7 +72,7 @@
         <!--end::Col-->
       </div>
 
-      <div class="row mb-7">
+      <div class="row mb-7" v-if="accountData.nomJeunefilleArabe != null">
         <!--begin::Label-->
         <label class="col-lg-4 fw-semibold text-muted"> maiden name arabic</label>
         <!--end::Label-->
@@ -91,7 +91,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">24/12/2003</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.dateNaissance }}</span>
         </div>
         <!--end::Col-->
       </div>
