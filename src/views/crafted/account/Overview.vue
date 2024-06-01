@@ -10,16 +10,12 @@
       <!--end::Card title-->
 
       <!--begin::Action-->
-      <router-link
-        to="settings"
-        class="btn btn-primary align-self-center"
-        >Edit Profile</router-link
-      >
+      <router-link to="settings" class="btn btn-primary align-self-center">Edit Profile</router-link>
       <!--end::Action-->
     </div>
     <!--begin::Card header-->
 
-   
+
 
     <!--begin::Card body-->
     <div class="card-body p-9">
@@ -44,7 +40,9 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">Max Smith</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">
+            {{ accountData.nom != null ? accountData.nom + " " + accountData.prenom : 'Max Smith'}}
+          </span>
         </div>
         <!--end::Col-->
       </div>
@@ -57,7 +55,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">ماكس سميث</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">ماكس سميث</span>
         </div>
         <!--end::Col-->
       </div>
@@ -85,7 +83,7 @@
         </div>
         <!--end::Col-->
       </div>
-      
+
       <div class="row mb-7">
         <!--begin::Label-->
         <label class="col-lg-4 fw-semibold text-muted">Birth Date </label>
@@ -201,11 +199,7 @@
         <!--begin::Label-->
         <label class="col-lg-4 fw-semibold text-muted">
           Contact Phone
-          <i
-            class="fas fa-exclamation-circle ms-1 fs-7"
-            v-tooltip
-            title="Phone number must be active"
-          ></i>
+          <i class="fas fa-exclamation-circle ms-1 fs-7" v-tooltip title="Phone number must be active"></i>
         </label>
         <!--end::Label-->
 
@@ -257,26 +251,27 @@
       </div>
       <!--end::Input group-->
 
-      
-      
+
+
     </div>
     <!--end::Card body-->
   </div>
   <!--end::details View-->
 
   <!--begin::Row-->
-  
+
   <!--end::Row-->
 </template>
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, readonly, ref } from "vue";
 import KTChartWidget1 from "@/components/widgets/charts/Widget1.vue";
 import KTListWidget5 from "@/components/widgets/lists/Widget5.vue";
 import KTTableWidget5 from "@/components/widgets/tables/Widget5.vue";
 import KTListWidget1 from "@/components/widgets/lists/Widget1.vue";
 import ApiService from "@/core/services/ApiService";
+import { fetchMe } from "@/core/data/employee";
 
 export default defineComponent({
   name: "account-overview",
@@ -287,27 +282,30 @@ export default defineComponent({
     KTListWidget1,
   },
   setup() {
-    // let id = {id: 555};
-    ApiService.setHeader();
-    ApiService.post("Employee/GetMe", {}).then((response) => {
-      console.log(response.data);
-    }).catch((error) => {
-      console.log(error);
-    });
+    let accountData: any;
+    let loading = ref(true);
+    // onMounted(async () => {
+    //   const response = await fetchMe();
+    //   accountData.value = response;
+    //   console.log(response);
+    // });
 
     return {
+      accountData,
       getAssetPath,
+      loading,
     };
   },
-  mouted()
-  {
-    // ApiService.setHeader();
-    // let id = "555";
-    // ApiService.get("Employee/GetByID", id).then((response) => {
-    //   console.log(response.data);
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
-  }
+  mounted() {
+      this.fetchMe();
+  },
+  methods: {
+    async fetchMe() {
+      const response = await fetchMe();
+      console.log(response);
+      this.accountData = response;
+      this.loading = false;
+    },
+  },
 });
 </script>

@@ -1,179 +1,147 @@
 <template>
-    <!--begin::Toolbar-->
-    <div class="d-flex flex-wrap flex-stack my-5">
-      <!--begin::Heading-->
-      <h2 class="fs-2 fw-semibold my-2">
-       Demandes à traiter
-        <span class="fs-6 text-gray-500 ms-1">by Status</span>
-      </h2>
-      <!--end::Heading-->
-  
-      <!--begin::Controls-->
-      <div class="d-flex flex-wrap my-1">
-        <!--begin::Select wrapper-->
-        <div class="m-0">
-          <!--begin::Select-->
-          <select
-            name="status"
-            data-control="select2"
-            data-hide-search="true"
-            class="form-select form-select-white form-select-sm fw-bold w-125px"
-          >
-            <option value="Active" selected>Active</option>
-            <option value="Approved">In Progress</option>
-            <option value="Declined">To Do</option>
-            <option value="In Progress">Completed</option>
-          </select>
-          <!--end::Select-->
-        </div>
-        <!--end::Select wrapper-->
+  <!--begin::Toolbar-->
+  <div class="d-flex flex-wrap flex-stack my-5">
+    <!--begin::Heading-->
+    <h2 class="fs-2 fw-semibold my-2">
+      Demandes à traiter
+      <span class="fs-6 text-gray-500 ms-1">by Status</span>
+    </h2>
+    <!--end::Heading-->
+
+    <!--begin::Controls-->
+    <div class="d-flex flex-wrap my-1">
+      <!--begin::Select wrapper-->
+      <div class="m-0">
+        <!--begin::Select-->
+        <select name="status" data-control="select2" data-hide-search="true"
+          class="form-select form-select-white form-select-sm fw-bold w-125px">
+          <option value="Active" selected>Active</option>
+          <option value="Approved">In Progress</option>
+          <option value="Declined">To Do</option>
+          <option value="In Progress">Completed</option>
+        </select>
+        <!--end::Select-->
       </div>
-      <!--end::Controls-->
+      <!--end::Select wrapper-->
     </div>
-    <!--end::Toolbar-->
-  
-    <!--begin::Row-->
-    <div class="row g-6 g-xl-9" 
-     >
-     
-  
+    <!--end::Controls-->
+  </div>
+  <!--end::Toolbar-->
 
-
-      <!--begin::Col-->
-    <div class="col-md-6 col-xl-4" 
-    
-
-    @on-sort="sort"
-        @on-items-select="onItemSelect"
-        :data="Data"
-
-    v-for="(demande, index) in Data" :key="index">
-        <KTCardAbsCong
-          :status=demande.Etat
-         
-          title="Demande d'absence"
-          :dd=demande.DateDebut
-          :df=demande.DateFin
-          :desc=demande.Motif
-            
-            
-
-
-            :progress="50"
-         
-          datedebut=:dd
-          DateFin=:df
-          description=:desc
-          :icon="getAssetPath('media/svg/brand-logos/plurk.svg')"
-          :users="users1"
-          
-          
-        ></KTCardAbsCong>
-      </div>
-      <!--end::Col-->
-  
+  <!--begin::Row-->
+  <div class="row g-6 g-xl-9">
 
 
 
-       
-      <!--begin::Pagination-->
-      <div class="d-flex flex-stack flex-wrap pt-10">
-        <div class="fs-6 fw-semibold text-gray-700">
-          Showing 1 to 10 of 50 entries
-        </div>
-  
-        <!--begin::Pages-->
-        <ul class="pagination">
-          <li class="page-item previous">
-            <a href="#" class="page-link"><i class="previous"></i></a>
-          </li>
-  
-          <li class="page-item active">
-            <a href="#" class="page-link">1</a>
-          </li>
-  
-          <li class="page-item">
-            <a href="#" class="page-link">2</a>
-          </li>
-  
-          <li class="page-item">
-            <a href="#" class="page-link">3</a>
-          </li>
-  
-          <li class="page-item">
-            <a href="#" class="page-link">4</a>
-          </li>
-  
-          <li class="page-item">
-            <a href="#" class="page-link">5</a>
-          </li>
-  
-          <li class="page-item">
-            <a href="#" class="page-link">6</a>
-          </li>
-  
-          <li class="page-item next">
-            <a href="#" class="page-link"><i class="next"></i></a>
-          </li>
-        </ul>
-        <!--end::Pages-->
-      </div>
-      <!--end::Pagination-->
+
+    <!--begin::Col-->
+    <div class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="Data"
+      v-for="(demande, index) in Data" :key="index">
+      <KTCardAbsCong :status=demande.Etat title="Demande d'absence" :dd=demande.DateDebut :df=demande.DateFin
+        :desc=demande.Motif :progress="50" datedebut=:dd DateFin=:df description=:desc
+        :icon="getAssetPath('media/svg/brand-logos/plurk.svg')" :users="[
+          {
+            name: 'Max Smith',
+            avatar: getAssetPath('media/avatars/150-1.jpg'),
+          },
+          {
+            name: 'Sean Bean',
+            avatar: getAssetPath('media/avatars/150-2.jpg'),
+          },
+          {
+            name: 'Brian Cox',
+            avatar: getAssetPath('media/avatars/150-3.jpg'),
+          },
+        ]"></KTCardAbsCong>
     </div>
-  </template>
-  
-  <script lang="ts">
+    <!--end::Col-->
+
+
+
+
+
+    <!--begin::Pagination-->
+    <div class="d-flex flex-stack flex-wrap pt-10">
+      <div class="fs-6 fw-semibold text-gray-700">
+        Showing 1 to 10 of 50 entries
+      </div>
+
+      <!--begin::Pages-->
+      <ul class="pagination">
+        <li class="page-item previous">
+          <a href="#" class="page-link"><i class="previous"></i></a>
+        </li>
+
+        <li class="page-item active">
+          <a href="#" class="page-link">1</a>
+        </li>
+
+        <li class="page-item">
+          <a href="#" class="page-link">2</a>
+        </li>
+
+        <li class="page-item">
+          <a href="#" class="page-link">3</a>
+        </li>
+
+        <li class="page-item">
+          <a href="#" class="page-link">4</a>
+        </li>
+
+        <li class="page-item">
+          <a href="#" class="page-link">5</a>
+        </li>
+
+        <li class="page-item">
+          <a href="#" class="page-link">6</a>
+        </li>
+
+        <li class="page-item next">
+          <a href="#" class="page-link"><i class="next"></i></a>
+        </li>
+      </ul>
+      <!--end::Pages-->
+    </div>
+    <!--end::Pagination-->
+  </div>
+</template>
+
+<script lang="ts">
 
 
 
 
 
 
-  import { defineComponent, onMounted, ref } from "vue";
-  import { getAssetPath } from "@/core/helpers/assets";
-  import KTCardAbsCong from "@/components/cards/Card1RH.vue";
-  import KTCardDoc from "@/components/cards/CardDocRH.vue";
-  import KTCardChang from "@/components/cards/CardChangRH.vue";
-  import { fetchDemandes, type IDemandes } from "@/core/data/demande";
-  import { MenuComponent } from "@/assets/ts/components";
-  import type { Sort } from "@/components/kt-datatable//table-partials/models";
-  import arraySort from "array-sort";
-
-  
-  export default defineComponent({
-    name: "profile-projects",
-    components: {
-      KTCardAbsCong,KTCardDoc, KTCardChang
-    },
+import { defineComponent, onMounted, ref } from "vue";
+import { getAssetPath } from "@/core/helpers/assets";
+import KTCardAbsCong from "@/components/cards/Card1RH.vue";
+import KTCardDoc from "@/components/cards/CardDocRH.vue";
+import KTCardChang from "@/components/cards/CardChangRH.vue";
+import { fetchDemandes, type IDemandes } from "@/core/data/demande";
+import { MenuComponent } from "@/assets/ts/components";
+import type { Sort } from "@/components/kt-datatable//table-partials/models";
+import arraySort from "array-sort";
 
 
+export default defineComponent({
+  name: "profile-projects",
+  components: {
+    KTCardAbsCong, KTCardDoc, KTCardChang
+  },
+  setup() {
+    const selectedIds = ref<Array<number>>([]);
 
-   
+    const Data = ref<Array<IDemandes>>([]);
+    const initDemandes = ref<Array<IDemandes>>([]);
 
+    onMounted(async () => {
+      const demandes = await fetchDemandes();
+      Data.value = demandes;
+      console.log(demandes);
+    });
 
-
-    setup() {
-
-
-
-        const selectedIds = ref<Array<number>>([]);
-
-const Data =ref<Array<IDemandes>>([]);
-//ref<Array<ICustomer>>(customers);
-const initDemandes = ref<Array<IDemandes>>([]);
-
-onMounted(async () => {
-  const demandes = await fetchDemandes();
-  Data.value = demandes;
-  console.log(demandes);
-  // initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
-});
-
-
-
-
-
-const deleteFewDemandes = () => {
+    const deleteFewDemandes = () => {
       selectedIds.value.forEach((item) => {
         deleteDemandes(item);
       });
@@ -220,7 +188,7 @@ const deleteFewDemandes = () => {
         arraySort(Data.value, sort.label, { reverse });
       }
     };
-   
+
     const onItemSelect = (selectedItems: Array<number>) => {
       selectedIds.value = selectedItems;
     };
@@ -229,21 +197,20 @@ const deleteFewDemandes = () => {
 
 
 
-      
 
-  
-      return {
-       
-        getAssetPath,
-        Data,
-        search,
-        searchItems,
-        onItemSelect,
-        deleteFewDemandes,
-        sort,
 
-      };
-    },
-  });
-  </script>
-  
+
+    return {
+
+      getAssetPath,
+      Data,
+      search,
+      searchItems,
+      onItemSelect,
+      deleteFewDemandes,
+      sort,
+
+    };
+  },
+});
+</script>

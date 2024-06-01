@@ -26,8 +26,6 @@
             <!--begin::Title-->
             <h1 class="mb-3">Ajouter un employé</h1>
             <!--end::Title-->
-
-
           </div>
           <!--end::Heading-->
 
@@ -45,8 +43,6 @@
           </div>
           <!--end::Input group-->
 
-
-
           <!--begin::Input group-->
           <div class="fv-row mb-7">
             <!--begin::Label-->
@@ -60,7 +56,6 @@
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
 
           <!--begin::Input group-->
           <div class="fv-row mb-7">
@@ -76,7 +71,6 @@
           </div>
           <!--end::Input group-->
 
-
           <!--begin::Input group-->
           <div class="fv-row mb-7">
             <!--begin::Label-->
@@ -90,8 +84,6 @@
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
-
 
           <!--begin::Input group-->
           <div class="fv-row mb-7">
@@ -107,8 +99,6 @@
           </div>
           <!--end::Input group-->
 
-
-
           <!--begin::Input group-->
           <div class="fv-row mb-7">
             <!--begin::Label-->
@@ -122,7 +112,6 @@
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
 
           <!--begin::Input group-->
           <div class="fv-row mb-7">
@@ -138,7 +127,6 @@
           </div>
           <!--end::Input group-->
 
-
           <!--begin::Input group-->
           <div class="fv-row mb-7">
             <!--begin::Label-->
@@ -152,7 +140,6 @@
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
 
           <!--begin::Input group-->
           <div class="d-flex flex-column mb-7 fv-row">
@@ -175,7 +162,6 @@
           </div>
           <!--end::Input group-->
 
-
           <!--begin::Input group-->
           <div class="d-flex flex-column mb-7 fv-row">
             <!--begin::Label-->
@@ -190,12 +176,10 @@
             <el-select v-model="formData.sexe">
               <el-option value="">Homme</el-option>
               <el-option value="">Femme</el-option>
-
             </el-select>
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
 
           <!--begin::Input group-->
           <div class="d-flex flex-column mb-7 fv-row">
@@ -218,7 +202,6 @@
           </div>
           <!--end::Input group-->
 
-
           <!--begin::Input group-->
           <div class="d-flex flex-column mb-7 fv-row">
             <!--begin::Label-->
@@ -240,7 +223,6 @@
           </div>
           <!--end::Input group-->
 
-
           <!--begin::Input group-->
           <div class="d-flex flex-column mb-7 fv-row">
             <!--begin::Label-->
@@ -258,14 +240,10 @@
               <el-option value="Célibataire"> Célibataire </el-option>
               <el-option value="Divorcé"> Divorcé </el-option>
               <el-option value="Veuf"> Veuf </el-option>
-
             </el-select>
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
-
-
 
           <!--begin::Input group-->
           <div class="d-flex flex-column mb-7 fv-row">
@@ -298,8 +276,6 @@
           </div>
           <!--end::Input group-->
 
-
-
           <!--begin::Input group-->
           <div class="fv-row mb-7">
             <!--begin::Label-->
@@ -318,8 +294,6 @@
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
-
 
           <!--begin::Input group-->
           <div class="fv-row mb-7">
@@ -340,16 +314,12 @@
           </div>
           <!--end::Input group-->
 
-
-
-
-
-
           <!--begin::Input group-->
           <div class="fv-row mb-7">
             <!--begin::Label-->
             <label class="fs-6 fw-semibold mb-2">
-              <span class="required">Mot de passe à affecter (pourra etre changé par l'employé)</span>
+              <span class="required">Mot de passe à affecter (pourra etre changé par
+                l'employé)</span>
 
               <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="au moins 8 caracteres"></i>
             </label>
@@ -362,10 +332,6 @@
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
-
-
-
 
           <!--begin::Input group-->
           <div class="d-flex flex-column mb-7 fv-row">
@@ -380,13 +346,6 @@
             <!--end::Input-->
           </div>
           <!--end::Input group-->
-
-
-
-
-
-
-
 
           <!--begin::Input group-->
           <div class="mb-15 fv-row">
@@ -455,7 +414,7 @@
     <!--end::Modal content-->
   </div>
   <!--end::Modal dialog-->
-  </div>
+  <!-- </div> -->
   <!--end::Modal - New Target-->
 </template>
 
@@ -664,7 +623,7 @@ export default defineComponent({
       formRef.value.validate((valid: boolean) => {
         if (valid) {
           loading.value = true;
-
+          console.log(formData.value);
           setTimeout(() => {
             loading.value = false;
 
