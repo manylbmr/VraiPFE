@@ -175,6 +175,14 @@ export default defineComponent({
     ExportCustomerModal,
     AddCustomerModal,
   },
+
+
+
+ 
+  
+
+
+
   setup() {
     const tableHeader = ref([
       {
@@ -223,8 +231,13 @@ export default defineComponent({
     onMounted(async () => {
       const customers = await fetchCustomers();
       tableData.value = customers;
+      console.log(customers);
       // initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
     });
+
+
+    
+
 
     const deleteFewCustomers = () => {
       selectedIds.value.forEach((item) => {

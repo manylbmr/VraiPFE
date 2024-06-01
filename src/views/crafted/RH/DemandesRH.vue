@@ -33,99 +33,49 @@
     <!--end::Toolbar-->
   
     <!--begin::Row-->
-    <div class="row g-6 g-xl-9">
+    <div class="row g-6 g-xl-9" 
+     >
      
   
+
+
       <!--begin::Col-->
-      <div class="col-md-6 col-xl-4">
+    <div class="col-md-6 col-xl-4" 
+    
+
+    @on-sort="sort"
+        @on-items-select="onItemSelect"
+        :data="Data"
+
+    v-for="(demande, index) in Data" :key="index">
         <KTCardAbsCong
-          status="Pending"
-          status-data-badge-color="badge-light"
-          :progress="30"
-          :icon="getAssetPath('media/svg/brand-logos/disqus.svg')"
+          :status=demande.Etat
+         
           title="Demande d'absence"
-          datedebut="15/05/2024"
-          DateFin="17/05/2024"
-          description="Maladie"
-          budget="$36,400.00"
-          :users="users2"
-        ></KTCardAbsCong>
-      </div>
-      <!--end::Col-->
-  
-       <!--begin::Col-->
-       <div class="col-md-6 col-xl-4">
-        <KTCardAbsCong
-          :progress="50"
-          title="Demande de congé"
-          datedebut="12/03/2024"
-          DateFin="24/03/2024"
-          description="Vacances en famille"
+          :dd=demande.DateDebut
+          :df=demande.DateFin
+          :desc=demande.Motif
+            
+            
+
+
+            :progress="50"
+         
+          datedebut=:dd
+          DateFin=:df
+          description=:desc
           :icon="getAssetPath('media/svg/brand-logos/plurk.svg')"
           :users="users1"
+          
+          
         ></KTCardAbsCong>
       </div>
       <!--end::Col-->
   
-      <!--begin::Col-->
-      <div class="col-md-6 col-xl-4">
-        <KTCardDoc
-          status="Completed"
-          status-data-badge-color="badge-light-success"
-          :progress="100"
-          :icon="getAssetPath('media/svg/brand-logos/figma-1.svg')"
-          title="Demande de document"
-          description="Besoin d'un certificat de travail pour AADL"
-          budget="$605,100.00"
-          :users="users3"
-        ></KTCardDoc>
-      </div>
-      <!--end::Col-->
-  
-      <!--begin::Col-->
-      <div class="col-md-6 col-xl-4">
-        <KTCardChang
-          status="Pending"
-          :progress="60"
-          status-data-badge-color="badge-light"
-          :icon="getAssetPath('media/svg/brand-logos/sentry-3.svg')"
-          title="Demande de changement d'information personnelle"
-          budget="$36,400.00"
-          :users="users4"
-        ></KTCardChang>
-      </div>
-      <!--end::Col-->
-  
-       <!--begin::Col-->
-       <div class="col-md-6 col-xl-4">
-        <KTCardAbsCong
-          :progress="50"
-          title="Demande d'absence"
-          datedebut="12/01/2024"
-          DateFin="14/01/2024"
-          description="Mariage d'un proche"
-          :icon="getAssetPath('media/svg/brand-logos/plurk.svg')"
-          :users="users1"
-        ></KTCardAbsCong>
-      </div>
-      <!--end::Col-->
-  
-      <!--begin::Col-->
-      <div class="col-md-6 col-xl-4">
-        <KTCardDoc
-          status="Completed"
-          status-data-badge-color="badge-light-success"
-          :progress="100"
-          :icon="getAssetPath('media/svg/brand-logos/figma-1.svg')"
-          title="Demande de document"
-          description="Besoin d'une fiche de paye pour la banque"
-        
-          budget="$605,100.00"
-          :users="users3"
-        ></KTCardDoc>
-      </div>
-      <!--end::Col-->
-  
+
+
+
+       
       <!--begin::Pagination-->
       <div class="d-flex flex-stack flex-wrap pt-10">
         <div class="fs-6 fw-semibold text-gray-700">
@@ -173,71 +123,125 @@
   </template>
   
   <script lang="ts">
+
+
+
+
+
+
+  import { defineComponent, onMounted, ref } from "vue";
   import { getAssetPath } from "@/core/helpers/assets";
-  import { defineComponent } from "vue";
   import KTCardAbsCong from "@/components/cards/Card1RH.vue";
   import KTCardDoc from "@/components/cards/CardDocRH.vue";
   import KTCardChang from "@/components/cards/CardChangRH.vue";
+  import { fetchDemandes, type IDemandes } from "@/core/data/demande";
+  import { MenuComponent } from "@/assets/ts/components";
+  import type { Sort } from "@/components/kt-datatable//table-partials/models";
+  import arraySort from "array-sort";
+
   
   export default defineComponent({
     name: "profile-projects",
     components: {
       KTCardAbsCong,KTCardDoc, KTCardChang
     },
+
+
+
+   
+
+
+
     setup() {
-      const users1 = [
-        
-        { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-  
-      ];
-  
-      const users2 = [
-      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-      ];
-  
-      const users3 = [
-      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-      ];
-  
-      const users4 = [
-      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-      ];
-  
-      const users5 = [
-        {
-          name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") 
-        },
-        {
-          name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") 
-        },
-        { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-      ];
-  
-     
-  
-      const users7 = [
-      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-      ];
-  
+
+
+
+        const selectedIds = ref<Array<number>>([]);
+
+const Data =ref<Array<IDemandes>>([]);
+//ref<Array<ICustomer>>(customers);
+const initDemandes = ref<Array<IDemandes>>([]);
+
+onMounted(async () => {
+  const demandes = await fetchDemandes();
+  Data.value = demandes;
+  console.log(demandes);
+  // initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
+});
+
+
+
+
+
+const deleteFewDemandes = () => {
+      selectedIds.value.forEach((item) => {
+        deleteDemandes(item);
+      });
+      selectedIds.value.length = 0;
+    };
+
+    const deleteDemandes = (id: number) => {
+      for (let i = 0; i < Data.value.length; i++) {
+        if (Data.value[i].id === id) {
+          Data.value.splice(i, 1);
+        }
+      }
+    };
+
+    const search = ref<string>("");
+    const searchItems = () => {
+      Data.value.splice(0, Data.value.length, ...initDemandes.value);
+      if (search.value !== "") {
+        let results: Array<IDemandes> = [];
+        for (let j = 0; j < Data.value.length; j++) {
+          if (searchingFunc(Data.value[j], search.value)) {
+            results.push(Data.value[j]);
+          }
+        }
+        Data.value.splice(0, Data.value.length, ...results);
+      }
+      MenuComponent.reinitialization();
+    };
+
+    const searchingFunc = (obj: any, value: string): boolean => {
+      for (let key in obj) {
+        if (!Number.isInteger(obj[key]) && !(typeof obj[key] === "object")) {
+          if (obj[key].indexOf(value) != -1) {
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    const sort = (sort: Sort) => {
+      const reverse: boolean = sort.order === "asc";
+      if (sort.label) {
+        arraySort(Data.value, sort.label, { reverse });
+      }
+    };
+   
+    const onItemSelect = (selectedItems: Array<number>) => {
+      selectedIds.value = selectedItems;
+    };
+
+
+
+
+
       
-  
-      const users9 = [
-      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
-      ];
+
   
       return {
-        users1,
-        users2,
-        users3,
-        users4,
-        users5,
        
-        users7,
-       
-        users9,
         getAssetPath,
+        Data,
+        search,
+        searchItems,
+        onItemSelect,
+        deleteFewDemandes,
+        sort,
+
       };
     },
   });

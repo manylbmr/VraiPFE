@@ -72,7 +72,7 @@ const MainMenuConfig: Array<MenuItem> = [
               },
               {
                 heading: "Liste équipes",
-                route: "/crafted/RH/ListeEquipe",
+                route: "/crafted/RH/ListeEquipes",
               },
               {
                 heading: "Demandes à traiter",
@@ -80,7 +80,7 @@ const MainMenuConfig: Array<MenuItem> = [
               },
               {
                 heading: "Historique demandes",
-                route: "/crafted/RH/HistoriqueDemandes",
+                route: "/crafted/RH/Historiquedemandes",
               },
               
             ],
@@ -302,13 +302,13 @@ const MainMenuConfig: Array<MenuItem> = [
             route: "/crafted/widgets/feeds",
           },
         ],
-      },
+      },*/
     ],
   },
   {
-    heading: "apps",
+    heading: " ",
     route: "/apps",
-    pages: [
+    pages: [/*
       {
         sectionTitle: "customers",
         route: "/customers",
@@ -352,13 +352,13 @@ const MainMenuConfig: Array<MenuItem> = [
             route: "/apps/subscriptions/view-subscription",
           },
         ],
-      },
+      },*/
       {
         heading: "calendarApp",
         route: "/apps/calendar",
         keenthemesIcon: "calendar-8",
         bootstrapIcon: "bi-calendar3-event",
-      },
+      },/*
       {
         sectionTitle: "chat",
         route: "/chat",

@@ -119,8 +119,8 @@ const routes: Array<RouteRecordRaw> = [
             },
           },
           {
-            path: "ListeEquipe",
-            name: "Liste Equipes",
+            path: "ListeEquipes",
+            name: "ListeEquipes",
             component: () =>
               import("@/views/crafted/RH/ListeEq.vue"),
             meta: {
@@ -129,7 +129,7 @@ const routes: Array<RouteRecordRaw> = [
           },
           {
             path: "DemandeTraiter",
-            name: "Demandes à Traiter",
+            name: "DemandeTraiter",
             component: () =>
               import("@/views/crafted/RH/DemandesRH.vue"),
             meta: {
@@ -138,7 +138,7 @@ const routes: Array<RouteRecordRaw> = [
           },
           {
             path: "Historiquedemandes",
-            name: "Historique des demandes",
+            name: "Historiquedemandes",
             component: () =>
               import("@/views/crafted/RH/HistoriqueRH.vue"),
             meta: {
