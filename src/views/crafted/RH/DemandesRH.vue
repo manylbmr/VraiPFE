@@ -35,28 +35,127 @@
 
 
     <!--begin::Col-->
-    <div class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="Data"
-      v-for="(demande, index) in Data" :key="index">
-      <KTCardAbsCong :status=demande.Etat title="Demande d'absence" :dd=demande.DateDebut :df=demande.DateFin
-        :desc=demande.Motif :progress="50" datedebut=:dd DateFin=:df description=:desc
-        :icon="getAssetPath('media/svg/brand-logos/plurk.svg')" :users="[
-          {
-            name: 'Max Smith',
-            avatar: getAssetPath('media/avatars/150-1.jpg'),
-          },
-          {
-            name: 'Sean Bean',
-            avatar: getAssetPath('media/avatars/150-2.jpg'),
-          },
-          {
-            name: 'Brian Cox',
-            avatar: getAssetPath('media/avatars/150-3.jpg'),
-          },
-        ]"></KTCardAbsCong>
+    <div  class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="DataConge"
+      v-for="(demande, index) in DataConge" :key="index">
+
+      <div  @on-sort="sort" @on-items-select="onItemSelect" :data="tableData"
+      v-for="(emp, index) in tableData" :key="index">
+
+    <div v-if="emp.id == demande.MatriculeEmp"   >
+        
+
+          <KTCardAbsCong 
+      :status=demande.Etat 
+      title="Demande de congé"
+        
+      :username="emp.name"
+        
+        :progress="50" 
+        :datedebut=demande.DateDebut
+         :DateFin=demande.DateFin
+         :description=demande.Motif 
+         :initials=emp.name.charAt(0)
+         :equipe=emp.equipe
+
+        :icon=emp.image
+        :userid=emp.id
+         :users="[
+           
+          
+        ]"
+        
+        ></KTCardAbsCong>
+
+
+
+        </div>
+    </div>
     </div>
     <!--end::Col-->
 
 
+
+
+<!--begin::Col-->
+<div class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="DataAbs"
+      v-for="(demande, index) in DataAbs" :key="index">
+      <div  @on-sort="sort" @on-items-select="onItemSelect" :data="tableData"
+      v-for="(emp, index) in tableData" :key="index">
+
+    <div v-if="emp.id == demande.MatriculeEmp"   >
+        
+
+          <KTCardAbsCong 
+      :status=demande.Etat 
+      title="Demande de congé"
+        
+      :username="emp.name"
+        
+        :progress="50" 
+        :datedebut=demande.DateDebut
+         :DateFin=demande.DateFin
+         :description=demande.Motif 
+         :initials=emp.name.charAt(0)
+         :equipe=emp.equipe
+
+        :icon=emp.image
+        :userid=emp.id
+         :users="[
+           
+          
+        ]"
+        
+        ></KTCardAbsCong>
+
+
+
+        </div>
+    </div>
+    </div>
+    <!--end::Col-->
+
+
+
+
+
+    <!--begin::Col-->
+    <div class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="DataDoc"
+      v-for="(demande, index) in DataDoc" :key="index">
+      <KTCardDoc
+      :status=demande.Etat 
+      title="Demande de document"
+        
+       
+        
+        :progress="50" 
+        :typedoc=demande.TypeDoc
+
+         :description=demande.Motif 
+        :icon="getAssetPath('media/svg/brand-logos/plurk.svg')" :users="[
+          
+        ]">
+        </KTCardDoc>
+    </div>
+    <!--end::Col-->
+
+
+    <!--begin::Col-->
+    <div class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="DataChang"
+      v-for="(demande, index) in DataChang" :key="index">
+      <KTCardChang
+      :status=demande.Etat 
+      title="Demande de changement d'info perso"
+        
+       
+        
+        :progress="50" 
+       :nouvelleinfo=demande.NouvelleInformationMatricule
+        
+        :icon="getAssetPath('media/svg/brand-logos/plurk.svg')" :users="[
+          
+        ]"></KTCardChang>
+    </div>
+    <!--end::Col-->
 
 
 
@@ -106,22 +205,26 @@
   </div>
 </template>
 
+
+
+
 <script lang="ts">
-
-
-
-
-
 
 import { defineComponent, onMounted, ref } from "vue";
 import { getAssetPath } from "@/core/helpers/assets";
 import KTCardAbsCong from "@/components/cards/Card1RH.vue";
 import KTCardDoc from "@/components/cards/CardDocRH.vue";
 import KTCardChang from "@/components/cards/CardChangRH.vue";
-import { fetchDemandes, type IDemandes } from "@/core/data/demande";
+import { fetchDemandesAbsence , type IDemandesAbsence } from "@/core/data/demande";
+import { fetchDemandesChangement , type IDemandesChang} from "@/core/data/demande";
+import { fetchDemandesConge , type IDemandesConge } from "@/core/data/demande";
+import { fetchDemandesDocument , type IDemandesDoc} from "@/core/data/demande";
+import  { fetchDemandes, type IDemandes } from "@/core/data/demande";
 import { MenuComponent } from "@/assets/ts/components";
+
 import type { Sort } from "@/components/kt-datatable//table-partials/models";
 import arraySort from "array-sort";
+import { fetchCustomers, type ICustomer } from "@/core/data/customers";
 
 
 export default defineComponent({
@@ -133,13 +236,71 @@ export default defineComponent({
     const selectedIds = ref<Array<number>>([]);
 
     const Data = ref<Array<IDemandes>>([]);
+        const DataAbs = ref<Array<IDemandesAbsence>>([]);
+        const DataChang = ref<Array<IDemandesChang>>([]);
+        const DataConge = ref<Array<IDemandesConge>>([]);
+        const DataDoc = ref<Array<IDemandesDoc>>([]);
+            
+
     const initDemandes = ref<Array<IDemandes>>([]);
+       
+
+        const tableData =ref<Array<ICustomer>>([]);
+    //ref<Array<ICustomer>>(customers);
+    const initCustomers = ref<Array<ICustomer>>([]);
+
+    onMounted(async () => {
+      const customers = await fetchCustomers();
+      tableData.value = customers;
+      console.log(customers);
+      // initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
+    });
+
+
+
+    onMounted(async () => {
+      const demandesAbs = await fetchDemandesAbsence();
+      DataAbs.value = demandesAbs;
+      console.log(demandesAbs);
+    });
+
+
+    onMounted(async () => {
+      const demandesConge = await fetchDemandesConge();
+      DataConge.value = demandesConge;
+      console.log(demandesConge);
+    });
+
+
+    onMounted(async () => {
+      const demandesDoc = await fetchDemandesDocument();
+      DataDoc.value = demandesDoc;
+      console.log(demandesDoc);
+    });
+
+
+    onMounted(async () => {
+      const demandesChang = await fetchDemandesChangement();
+      DataChang.value = demandesChang;
+      console.log(demandesChang);
+    });
+
 
     onMounted(async () => {
       const demandes = await fetchDemandes();
       Data.value = demandes;
+      initDemandes.value = demandes;
       console.log(demandes);
     });
+
+    onMounted(async () => {
+        
+       
+     
+
+    });
+
+
 
     const deleteFewDemandes = () => {
       selectedIds.value.forEach((item) => {
@@ -204,12 +365,19 @@ export default defineComponent({
 
       getAssetPath,
       Data,
+        DataAbs,
+        DataChang,
+        DataConge,
+        DataDoc,
+        deleteDemandes,
+
       search,
       searchItems,
       onItemSelect,
       deleteFewDemandes,
       sort,
-
+      tableData,
+       
     };
   },
 });

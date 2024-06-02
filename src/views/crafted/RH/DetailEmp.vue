@@ -11,7 +11,7 @@
           <div class="d-flex flex-center flex-column mb-5">
             <!--begin::Avatar-->
             <div class="symbol symbol-100px symbol-circle mb-7">
-              <img :src="getAssetPath('media/avatars/300-1.jpg')" alt="image" />
+              <img :src="emp.image"  />
             </div>
             <!--end::Avatar-->
 
@@ -20,16 +20,51 @@
               href="#"
               class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1"
             >
-              Max Smith
+
+
+
+             {{ emp.name }}
+
+
+           
+
+
+
+
+
+
+              
             </a>
             <!--end::Name-->
 
             <!--begin::Position-->
-            <div class="fs-5 fw-semibold text-muted mb-6">Développeur Web</div>
+            <div class="fs-5 fw-semibold text-muted mb-6">
+
+              <div  v-if="emp.poste == 0">
+            
+            
+            Developpeur web
+
+          </div>
+
+
+
+
+            </div>
             <!--end::Position-->
 
              <!--begin::Position-->
-             <div class="fs-5 fw-semibold text-muted mb-6">Département développement</div>
+             <div class="fs-5 fw-semibold text-muted mb-6">
+              
+              <div  v-if="emp.equipe == 1">
+            
+            
+            Departement developpement
+
+          </div>
+            
+            
+            </div>
             <!--end::Position-->
 
             <!--begin::Info-->
@@ -66,10 +101,10 @@
                 class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
               >
                 <div class="fs-4 fw-bold text-gray-700">
-                  <span class="w-50px">7.2/10</span>
+                  <span class="w-50px">{{ emp.score }}/10</span>
                   <KTIcon icon-name="arrow-up" icon-class="fs-3 text-success" />
                 </div>
-                <div class="fw-semibold text-muted">Score</div>
+                <div class="fw-semibold text-muted"></div>
               </div>
               <!--end::Stats-->
             </div>
@@ -104,13 +139,13 @@
              
               <!--begin::Details item-->
               <div class="fw-bold mt-5">Matricule</div>
-              <div class="text-gray-600">MS2535543</div>
+              <div class="text-gray-600">{{ emp.id }}</div>
               <!--begin::Details item-->
               <!--begin::Details item-->
               <div class="fw-bold mt-5">Email</div>
               <div class="text-gray-600">
                 <a href="#" class="text-gray-600 text-hover-primary"
-                  >mas23@keenthemes.com</a
+                  >{{ emp.email }}</a
                 >
               </div>
                <!--begin::Details item-->
@@ -121,24 +156,24 @@
               <!--begin::Details item-->
               <div class="fw-bold mt-5">Adresse</div>
               <div class="text-gray-600">
-                101 Collin Street, <br />Melbourne 3000 VIC <br />Australia
+                {{ emp.adresse }} 
               </div>
               <!--begin::Details item-->
               <!--begin::Details item-->
               <div class="fw-bold mt-5">Date d'entrée dans l'entreprise</div>
-              <div class="text-gray-600">26/11/2020</div>
+              <div class="text-gray-600">{{ emp.dateentree }}</div>
               <!--begin::Details item-->
               <!--begin::Details item-->
               <div class="fw-bold mt-5">Situation familiale</div>
-              <div class="text-gray-600">Célibataire (mskn)</div>
+              <div class="text-gray-600">{{ emp.situationFamiliale }}</div>
               <!--begin::Details item-->
               <!--begin::Details item-->
               <div class="fw-bold mt-5">Nombre de personnes à charge</div>
-              <div class="text-gray-600">0</div>
+              <div class="text-gray-600">{{ emp.nombreEnfants }} personnes</div>
               <!--begin::Details item-->
                <!--begin::Details item-->
                <div class="fw-bold mt-5">Reliquat</div>
-              <div class="text-gray-600">4 jours</div>
+              <div class="text-gray-600">{{ emp.reliquat }} jours</div>
               <!--begin::Details item-->
           
             </div>
@@ -359,7 +394,7 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import Dropdown3 from "@/components/dropdown/Dropdown3.vue";
 import NewCardModal from "@/components/modals/forms/NewCardModal.vue";
 import PaymentRecords from "@/components/customers/cards/overview/PaymentRecords.vue";
@@ -372,6 +407,8 @@ import Logs from "@/components/customers/cards/events-and-logs/Logs.vue";
 
 import Earnings from "@/components/customers/cards/statments/Earnings.vue";
 import Statement from "@/components/customers/cards/statments/Statement.vue";
+import { fetchCustomersById, type ICustomer } from "@/core/data/customers";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "customer-details",
@@ -388,8 +425,39 @@ export default defineComponent({
     NewCardModal,
   },
   setup() {
+
+
+
+
+    const emp=  ref<Array<ICustomer>>([]);
+    //ref<Array<ICustomer>>(customers);
+    const initCustomers = ref<Array<ICustomer>>([]);
+
+    
+
+
+    const route = useRoute();
+    
+    const matricule = ref<string>("");
+
+    onMounted(async () => {
+      matricule.value = route.query.matricule as string;
+      if (matricule.value) {
+        
+          emp.value = await fetchCustomersById(matricule.value);
+          console.log("test "+emp.value.image);
+
+       
+      }
+    });
+
+
+
+
+
     return {
       getAssetPath,
+      emp
     };
   },
 });

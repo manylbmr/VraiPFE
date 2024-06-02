@@ -15,6 +15,7 @@
                 :title="user.title"
                 :description="user.description"
                 :username="user.username"
+                
               >
                 <img v-if="user.src" alt="Pic" :src="user.src" />
                 <span

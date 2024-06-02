@@ -118,6 +118,19 @@ const routes: Array<RouteRecordRaw> = [
               pageTitle: "Liste Employés",
             },
           },
+
+
+          {
+            path: "DetailEmp",
+            name: "DetailEmp",
+            component: () =>
+              import("@/views/crafted/RH/DetailEmp.vue"),
+            meta: {
+              pageTitle: "Informations Employé",
+            },
+          },
+
+
           {
             path: "ListeEquipes",
             name: "ListeEquipes",

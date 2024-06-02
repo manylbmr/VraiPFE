@@ -31,32 +31,90 @@
     <div class="card-body pt-0 pb-5">
       <Datatable
         :header="tableHeader"
-        :data="tableData"
+        :data="Data"
         :items-per-page="5"
         :items-per-page-dropdown-enabled="false"
       >
-        <template v-slot:Titre="{ row: payment }">
-          {{ payment.Titre }}
+        <template v-slot:Titre="{ row: Data }">
+          <div  v-if="Data.typeDemande == 0">
+            
+            
+            Demande congé
+          
+          
+          </div>
+
+          <div  v-if="Data.typeDemande == 1">
+            
+            
+            Demande d'absence
+          
+          
+          </div>
+
+          <div  v-if="Data.typeDemande == 2">
+            
+            
+            Demande changement d'info
+          
+          
+          </div>
+
+          <div  v-if="Data.typeDemande == 3">
+            
+            
+            Demande document
+          
+          
+          </div>
+         
         </template>
-        <template v-slot:status="{ row: payment }">
-          <span :class="`badge badge-light-${payment.status.state}`">{{
-            payment.status.label
-          }}</span>
+        <template v-slot:status="{ row: Data }">
+          <div  v-if="Data.Etat == 0">
+            
+            
+            en cours de traitement
+          
+          
+          </div>
+
+          <div  v-if="Data.Etat == 1">
+            
+            
+            acceptée
+          
+          
+          </div>
+
+          <div  v-if="Data.Etat == 2">
+            
+            
+            refusée
+
+          </div>
+
+          <div  v-if="Data.Etat == 3">
+            
+            
+            annulée
+
+          </div>
+
         </template>
-        <template v-slot:datedébut="{ row: payment }">
-          {{ payment.datedébut }}
+        <template v-slot:datedébut="{ row: Data }">
+          {{ Data.DateDebut }}
         </template>
-        <template v-slot:datefin="{ row: payment }">
-          {{ payment.datefin }}
+        <template v-slot:datefin="{ row: Data }">
+          {{ Data.DateFin }}
         </template>
-        <template v-slot:description="{ row: payment }">
-          {{ payment.description }}
+        <template v-slot:description="{ row: Data }">
+          {{ Data.Motif }}
         </template>
         <template v-slot:traiteepar="{ row: payment }">
           {{ payment.traiteepar }}
         </template>
-        <template v-slot:date="{ row: payment }">
-          {{ payment.date }}
+        <template v-slot:date="{ row: Data }">
+          {{ Data.DateCreation }}
         </template>
         <template v-slot:actions="{ row: payment }">
           <a
@@ -101,8 +159,10 @@
 
 <script lang="ts">
 import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
+import  { fetchDemandes, type IDemandes } from "@/core/data/demande";
 import Datatable from "@/components/kt-datatable/KTDataTable.vue";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "payment-records",
@@ -113,6 +173,28 @@ export default defineComponent({
     Datatable,
   },
   setup() {
+
+
+    const initDemandes = ref<Array<IDemandes>>([]);
+
+      const Data = ref<Array<IDemandes>>([]);
+
+
+        const route = useRoute();
+    
+    const matricule = ref<string>("");
+
+
+      onMounted(async () => {
+        matricule.value = route.query.matricule as string;
+        
+      const demandes = await fetchDemandes(matricule.value);
+      Data.value = demandes;
+     
+      console.log(Data.value);
+    });
+
+
     const tableHeader = ref([
       {
         columnName: "Titre",
@@ -178,7 +260,7 @@ export default defineComponent({
       }
     };
 
-    return { tableHeader, tableData, deleteRecord, getAssetPath };
+    return { tableHeader, tableData, deleteRecord, getAssetPath, Data };
   },
 });
 </script>

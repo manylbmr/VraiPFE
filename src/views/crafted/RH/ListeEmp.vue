@@ -132,7 +132,7 @@
             <!--begin::Menu item-->
             <div class="menu-item px-3">
               <router-link
-                to="/apps/customers/customer-details"
+                to="DetailEmp"
                 class="menu-link px-3"
                 >View</router-link
               >
