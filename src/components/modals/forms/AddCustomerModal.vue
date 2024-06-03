@@ -227,8 +227,8 @@
                 <!--begin::Input-->
                 <el-select v-model="formData.sexe">
                   <el-option value="">Choisissez un sexe</el-option>
-                  <el-option value=0>Homme</el-option>
-                  <el-option value=1>Femme</el-option>
+                  <el-option value="M">Homme</el-option>
+                  <el-option value="F">Femme</el-option>
                 </el-select>
                 <!--end::Input-->
               </div>
@@ -475,8 +475,8 @@ interface NewformData {
   wilayaNaissance: string;
   communeNaissance: string;
   sexe: string;
-  titre: number;
-  situationFamiliale: number;
+  titre: string;
+  situationFamiliale: string;
   nationalites: string;
   linkToPhoto: string;
   reliquat: number;
@@ -517,9 +517,9 @@ export default defineComponent({
       paysNaissance: "",
       wilayaNaissance: "",
       communeNaissance: "",
-      sexe: "0",
-      titre: 0,
-      situationFamiliale: 0,
+      sexe: "M",
+      titre: "Mr",
+      situationFamiliale: "Célibataire",
       nationalites: "",
       linkToPhoto: "",
       reliquat: 0,
@@ -721,8 +721,8 @@ export default defineComponent({
               "PaysNaissance": formData.value.paysNaissance,
               "WilayaNaissance": formData.value.wilayaNaissance,
               "CommuneNaissance": formData.value.communeNaissance,
-                "Sexe": parseInt(formData.value.sexe),
-              "Titre": 0,
+              "Sexe": formData.value.sexe,
+              "Titre": formData.value.titre,
               "SituationFamiliale": formData.value.situationFamiliale,
               "Nationalites": "",
               "LinkToPhoto": "",
