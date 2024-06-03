@@ -227,8 +227,8 @@
                 <!--begin::Input-->
                 <el-select v-model="formData.sexe">
                   <el-option value="">Choisissez un sexe</el-option>
-                  <el-option value="homme">Homme</el-option>
-                  <el-option value="femme">Femme</el-option>
+                  <el-option value=0>Homme</el-option>
+                  <el-option value=1>Femme</el-option>
                 </el-select>
                 <!--end::Input-->
               </div>
@@ -475,7 +475,7 @@ interface NewformData {
   wilayaNaissance: string;
   communeNaissance: string;
   sexe: string;
-  titre: string;
+  titre: number;
   situationFamiliale: number;
   nationalites: string;
   linkToPhoto: string;
@@ -517,8 +517,8 @@ export default defineComponent({
       paysNaissance: "",
       wilayaNaissance: "",
       communeNaissance: "",
-      sexe: "",
-      titre: "",
+      sexe: "0",
+      titre: 0,
       situationFamiliale: 0,
       nationalites: "",
       linkToPhoto: "",
@@ -705,44 +705,79 @@ export default defineComponent({
 
           setTimeout(() => {
             loading.value = false;
-
+            const testData = {
+              "Matricule": formData.value.matricule,
+              "NSS": formData.value.nss,
+              "Nom": formData.value.nom,
+              "Prenom": formData.value.prenom,
+              "Prenom2": formData.value.prenom2,
+              "NomArabe": formData.value.nomArabe,
+              "PrenomArabe": formData.value.prenomArabe,
+              "Prenom2Arabe": formData.value.prenom2Arabe,
+              "DateNaissance": formData.value.dateNaissance,
+              "NomJeuneFille": formData.value.nomJeuneFille,
+              "NomJeuneFilleArabe": formData.value.nomJeuneFilleArabe,
+              "LieuNaissance": formData.value.lieuNaissance,
+              "PaysNaissance": formData.value.paysNaissance,
+              "WilayaNaissance": formData.value.wilayaNaissance,
+              "CommuneNaissance": formData.value.communeNaissance,
+                "Sexe": parseInt(formData.value.sexe),
+              "Titre": 0,
+              "SituationFamiliale": formData.value.situationFamiliale,
+              "Nationalites": "",
+              "LinkToPhoto": "",
+              "Reliquat": 1,
+              "IsResponsable": false,
+              "IDEquipe": 1,
+              "IDResponsable": "1",
+              "DateEntre": "2024-10-10",
+              "DateSortie": "2024-10-11",
+              "NbAnneeExperienceerne": 1,
+              "NbAnneeExperienceExterne": 1,
+              "NbEnfant": 1,
+              "Email": formData.value.email,
+              "password": formData.value.password,
+              "role": formData.value.role
+            }
+            // { matricule: "1231321",
+            //               nss: formData.value.nss,
+            //               nom: formData.value.nom,
+            //               prenom: formData.value.prenom,
+            //               prenom2: formData.value.prenom2,
+            //               nomArabe: formData.value.nomArabe,
+            //               prenomArabe: formData.value.prenomArabe,
+            //               prenom2Arabe: formData.value.prenom2Arabe,
+            //               dateNaissance: formData.value.dateNaissance,
+            //               nomJeuneFille: formData.value.nomJeuneFille,
+            //               nomJeuneFilleArabe: formData.value.nomJeuneFilleArabe,
+            //               lieuNaissance: "321321",//formData.value.lieuNaissance,
+            //               paysNaissance: formData.value.paysNaissance,
+            //               wilayaNaissance: formData.value.wilayaNaissance,
+            //               communeNaissance: formData.value.communeNaissance,
+            //               sexe: 0,//formData.value.sexe,
+            //               titre: 0,//formData.value.titre,
+            //               situationFamiliale: 0,// formData.value.situationFamiliale,
+            //               nationalites: formData.value.nationalites,
+            //               linkToPhoto: formData.value.linkToPhoto,
+            //               reliquat: formData.value.reliquat,
+            //               isResponsable: formData.value.isResponsable,
+            //               idEquipe: formData.value.idEquipe,
+            //               idResponsable: formData.value.idResponsable,
+            //               dateEntre: formData.value.dateEntre,
+            //               dateSortie: "2024-10-10",
+            //     "DateSortie": "2024-10-11",//formData.value.dateSortie,
+            //               nbAnneeExperienceInterne: formData.value.nbAnneeExperienceInterne,
+            //               nbAnneeExperienceExterne: formData.value.nbAnneeExperienceExterne,
+            //               nbEnfant: formData.value.nbEnfant,
+            //               email: formData.value.email,
+            //               score: formData.value.score,
+            //               password: formData.value.password,
+            //               role: formData.value.role};
 
             ApiService.setHeader();
-            ApiService.post("Employee", {
-              matricule: formData.value.matricule,
-              nss: formData.value.nss,
-              nom: formData.value.nom,
-              prenom: formData.value.prenom,
-              prenom2: formData.value.prenom2,
-              nomArabe: formData.value.nomArabe,
-              prenomArabe: formData.value.prenomArabe,
-              prenom2Arabe: formData.value.prenom2Arabe,
-              dateNaissance: formData.value.dateNaissance,
-              nomJeuneFille: formData.value.nomJeuneFille,
-              nomJeuneFilleArabe: formData.value.nomJeuneFilleArabe,
-              lieuNaissance: formData.value.lieuNaissance,
-              paysNaissance: formData.value.paysNaissance,
-              wilayaNaissance: formData.value.wilayaNaissance,
-              communeNaissance: formData.value.communeNaissance,
-              sexe: formData.value.sexe,
-              titre: formData.value.titre,
-              situationFamiliale: formData.value.situationFamiliale,
-              nationalites: formData.value.nationalites,
-              linkToPhoto: formData.value.linkToPhoto,
-              reliquat: formData.value.reliquat,
-              isResponsable: formData.value.isResponsable,
-              idEquipe: formData.value.idEquipe,
-              idResponsable: formData.value.idResponsable,
-              dateEntre: formData.value.dateEntre,
-              dateSortie: formData.value.dateSortie,
-              nbAnneeExperienceInterne: formData.value.nbAnneeExperienceInterne,
-              nbAnneeExperienceExterne: formData.value.nbAnneeExperienceExterne,
-              nbEnfant: formData.value.nbEnfant,
-              email: formData.value.email,
-              score: formData.value.score,
-              password: formData.value.password,
-              role: formData.value.role
-            });
+            ApiService.post("Employee/InsertJSON",
+              testData
+            );
 
             Swal.fire({
               text: "Form has been successfully submitted!",
