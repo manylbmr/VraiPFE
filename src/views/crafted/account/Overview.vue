@@ -128,7 +128,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">Male</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.sexe }}</span>
         </div>
         <!--end::Col-->
       </div>
@@ -166,7 +166,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-gray-900">Married</span>
+          <span class="fw-bold fs-6 text-gray-900" v-if="!loading">{{ accountData.situationFamiliale }}</span>
         </div>
         <!--end::Col-->
       </div>
