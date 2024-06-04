@@ -197,6 +197,20 @@
               <!--end::Input group-->
 
               <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fs-6 fw-semibold mb-2">Wilaya de Naissance</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-form-item prop="wilaya">
+                  <el-input v-model="formData.wilayaNaissance" type="text" placeholder="" />
+                </el-form-item>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
               <div class="d-flex flex-column mb-7 fv-row">
                 <!--begin::Label-->
                 <label class="fs-6 fw-semibold mb-2">
@@ -207,6 +221,25 @@
 
                 <!--begin::Input-->
                 <el-select v-model="formData.paysNaissance">
+                  <el-option v-for="(item, i) in countries" :key="`countries-select-option-${i}`" :value="item.code">
+                    {{ item.name }}
+                  </el-option>
+                </el-select>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-7 fv-row">
+                <!--begin::Label-->
+                <label class="fs-6 fw-semibold mb-2">
+                  <span class="required">Nationalite</span>
+                  <!-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="pays de naissance"></i> -->
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <el-select v-model="formData.nationalites">
                   <el-option v-for="(item, i) in countries" :key="`countries-select-option-${i}`" :value="item.code">
                     {{ item.name }}
                   </el-option>
@@ -255,26 +288,6 @@
               <!--end::Input group-->
 
               <!--begin::Input group-->
-              <!-- <div class="d-flex flex-column mb-7 fv-row"> -->
-              <!--begin::Label-->
-              <!-- <label class="fs-6 fw-semibold mb-2">
-                    <span class="required">Poste</span>
-                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Poste"></i>
-                  </label> -->
-              <!--end::Label-->
-
-              <!--begin::Input-->
-              <!-- <el-select v-model="formData.poste">
-                    <el-option value="">Choisissez un poste</el-option>
-                    <el-option value="Poste A">Poste A</el-option>
-                    <el-option value="Poste B">Poste B</el-option>
-                    <el-option value="Poste C">Poste C</el-option>
-                  </el-select> -->
-              <!--end::Input-->
-              <!-- </div> -->
-              <!--end::Input group-->
-
-              <!--begin::Input group-->
               <div class="d-flex flex-column mb-7 fv-row">
                 <!--begin::Label-->
                 <label class="fs-6 fw-semibold mb-2">
@@ -309,23 +322,6 @@
                 <el-input v-model="formData.nbEnfant" type="number" placeholder="Nombre d'enfants" />
                 <!--end::Input-->
               </div>
-              <!--end::Input group-->
-
-              <!--begin::Input group-->
-              <!-- <div class="fv-row mb-7"> -->
-              <!--begin::Label-->
-              <!-- <label class="fs-6 fw-semibold mb-2">
-                    <span class="required">Telephone</span>
-                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Telephone doit etre actif"></i>
-                  </label> -->
-              <!--end::Label-->
-
-              <!--begin::Input-->
-              <!-- <el-form-item prop="tel">
-                    <el-input v-model="formData.tel" />
-                  </el-form-item> -->
-              <!--end::Input-->
-              <!-- </div> -->
               <!--end::Input group-->
 
               <!--begin::Input group-->
@@ -425,39 +421,6 @@ import { countries } from "@/core/data/countries";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import ApiService from "@/core/services/ApiService";
 
-//data example
-//         "matricule": "555",
-//         "nss": "123456",
-//         "nom": "LEMMOUCHI",
-//         "prenom": "Abdou",
-//         "prenom2": null,
-//         "nomArabe": "لموشي",
-//         "prenomArabe": "عبدالرحمن",
-//         "prenom2Arabe": null,
-//         "dateNaissance": "2002-10-27",
-//         "nomJeuneFille": null,
-//         "nomJeuneFilleArabe": null,
-//         "lieuNaissance": "BEK",
-//         "paysNaissance": "DZ",
-//         "wilayaNaissance": "Alger",
-//         "communeNaissance": "BEK",
-//         "sexe": 0,
-//         "titre": 0,
-//         "situationFamiliale": 0,
-//         "nationalites": "DZ",
-//         "linkToPhoto": "",
-//         "reliquat": 10,
-//         "isResponsable": true,
-//         "idEquipe": 12,
-//         "idResponsable": null,
-//         "dateEntre": "0001-01-01",
-//         "dateSortie": null,
-//         "nbAnneeExperienceInterne": 5,
-//         "nbAnneeExperienceExterne": 5,
-//         "nbEnfant": null,
-//         "email": "abdou@gmail.com",
-//         "score": 0
-
 interface NewformData {
   matricule: string;
   nss: string;
@@ -526,11 +489,11 @@ export default defineComponent({
       isResponsable: true,
       idEquipe: 0,
       idResponsable: null,
-      dateEntre: "",
+      dateEntre: "2010-10-10",
       dateSortie: null,
       nbAnneeExperienceInterne: 0,
       nbAnneeExperienceExterne: 0,
-      nbEnfant: null,
+      nbEnfant: 0,
       email: "",
       score: 0,
       password: "",
@@ -705,78 +668,41 @@ export default defineComponent({
 
           setTimeout(() => {
             loading.value = false;
-            const testData = {
-              "Matricule": formData.value.matricule,
-              "NSS": formData.value.nss,
-              "Nom": formData.value.nom,
-              "Prenom": formData.value.prenom,
-              "Prenom2": formData.value.prenom2,
-              "NomArabe": formData.value.nomArabe,
-              "PrenomArabe": formData.value.prenomArabe,
-              "Prenom2Arabe": formData.value.prenom2Arabe,
-              "DateNaissance": formData.value.dateNaissance,
-              "NomJeuneFille": formData.value.nomJeuneFille,
-              "NomJeuneFilleArabe": formData.value.nomJeuneFilleArabe,
-              "LieuNaissance": formData.value.lieuNaissance,
-              "PaysNaissance": formData.value.paysNaissance,
-              "WilayaNaissance": formData.value.wilayaNaissance,
-              "CommuneNaissance": formData.value.communeNaissance,
-              "Sexe": formData.value.sexe,
-              "Titre": formData.value.titre,
-              "SituationFamiliale": formData.value.situationFamiliale,
-              "Nationalites": "",
-              "LinkToPhoto": "",
-              "Reliquat": 1,
-              "IsResponsable": false,
-              "IDEquipe": 1,
-              "IDResponsable": "1",
-              "DateEntre": "2024-10-10",
-              "DateSortie": "2024-10-11",
-              "NbAnneeExperienceerne": 1,
-              "NbAnneeExperienceExterne": 1,
-              "NbEnfant": 1,
-              "Email": formData.value.email,
-              "password": formData.value.password,
-              "role": formData.value.role
-            }
-            // { matricule: "1231321",
-            //               nss: formData.value.nss,
-            //               nom: formData.value.nom,
-            //               prenom: formData.value.prenom,
-            //               prenom2: formData.value.prenom2,
-            //               nomArabe: formData.value.nomArabe,
-            //               prenomArabe: formData.value.prenomArabe,
-            //               prenom2Arabe: formData.value.prenom2Arabe,
-            //               dateNaissance: formData.value.dateNaissance,
-            //               nomJeuneFille: formData.value.nomJeuneFille,
-            //               nomJeuneFilleArabe: formData.value.nomJeuneFilleArabe,
-            //               lieuNaissance: "321321",//formData.value.lieuNaissance,
-            //               paysNaissance: formData.value.paysNaissance,
-            //               wilayaNaissance: formData.value.wilayaNaissance,
-            //               communeNaissance: formData.value.communeNaissance,
-            //               sexe: 0,//formData.value.sexe,
-            //               titre: 0,//formData.value.titre,
-            //               situationFamiliale: 0,// formData.value.situationFamiliale,
-            //               nationalites: formData.value.nationalites,
-            //               linkToPhoto: formData.value.linkToPhoto,
-            //               reliquat: formData.value.reliquat,
-            //               isResponsable: formData.value.isResponsable,
-            //               idEquipe: formData.value.idEquipe,
-            //               idResponsable: formData.value.idResponsable,
-            //               dateEntre: formData.value.dateEntre,
-            //               dateSortie: "2024-10-10",
-            //     "DateSortie": "2024-10-11",//formData.value.dateSortie,
-            //               nbAnneeExperienceInterne: formData.value.nbAnneeExperienceInterne,
-            //               nbAnneeExperienceExterne: formData.value.nbAnneeExperienceExterne,
-            //               nbEnfant: formData.value.nbEnfant,
-            //               email: formData.value.email,
-            //               score: formData.value.score,
-            //               password: formData.value.password,
-            //               role: formData.value.role};
+
+            const params = "matricule=" + formData.value.matricule +
+              "&nss=" + formData.value.nss +
+              "&nom=" + formData.value.nom +
+              "&prenom=" + formData.value.prenom +
+              "&prenom2=" + formData.value.prenom2 +
+              "&nomArabe=" + formData.value.nomArabe +
+              "&prenomArabe=" + formData.value.prenomArabe +
+              "&prenom2Arabe=" + formData.value.prenom2Arabe +
+              "&dateNaissance=" + formData.value.dateNaissance +
+              "&nomJeuneFille=" + formData.value.nomJeuneFille +
+              "&nomJeuneFilleArabe=" + formData.value.nomJeuneFilleArabe +
+              "&lieuNaissance=" + formData.value.lieuNaissance +
+              "&paysNaissance=" + formData.value.paysNaissance +
+              "&wilayaNaissance=" + formData.value.wilayaNaissance +
+              "&communeNaissance=" + formData.value.communeNaissance +
+              "&sexe=" + formData.value.sexe +
+              "&titre=" + formData.value.titre +
+              "&situationFamiliale=" + formData.value.situationFamiliale +
+              "&nationalites=" + formData.value.nationalites +
+              "&reliquat=" + formData.value.reliquat +
+              "&isResponsable=" + formData.value.isResponsable +
+              "&idEquipe=" + formData.value.idEquipe +
+              "&idResponsable=" + formData.value.idResponsable +
+              "&dateEntre=" + formData.value.dateEntre +
+              "&nbAnneeExperienceInterne=" + formData.value.nbAnneeExperienceInterne +
+              "&nbAnneeExperienceExterne=" + formData.value.nbAnneeExperienceExterne +
+              "&nbEnfant=" + formData.value.nbEnfant +
+              "&email=" + formData.value.email +
+              "&password=" + formData.value.password +
+              "&role=" + formData.value.role;
 
             ApiService.setHeader();
-            ApiService.post("Employee/InsertJSON",
-              testData
+            ApiService.query("Employee/Insert?" + params,
+              {}
             );
 
             Swal.fire({
