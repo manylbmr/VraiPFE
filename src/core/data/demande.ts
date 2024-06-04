@@ -14,6 +14,7 @@ interface IDemandesConge {
     Motif: string;
     TypeConge: string;
     image: string;
+    lienversjust: string;
     
   }
 
@@ -32,6 +33,7 @@ interface IDemandesAbsence {
   JoursRecup: string;
   Isremunere: boolean;
     image: string;
+    lienversjust: string;
 }
 
 
@@ -60,6 +62,7 @@ interface IDemandesDoc {
     Motif: string;
     TypeDoc: string;
     image: string;
+    userid: string;
 
   }
 
@@ -67,6 +70,7 @@ interface IDemandesDoc {
 
   interface IDemandes {
     id: number;
+    equipe:number;
     MatriculeEmp: string;
     typeDemande: string;
     DateCreation: string;
@@ -91,6 +95,7 @@ interface IDemandesDoc {
 function fromAPIAbs(data: any): IDemandesAbsence {
   return {
     id: data.id,
+    
     MatriculeEmp: data.matriculeEmp,
     typeDemande: data.type,
     DateCreation: data.dateCreation,
@@ -101,6 +106,8 @@ function fromAPIAbs(data: any): IDemandesAbsence {
     JoursRecup: data.jourRecup,
     Isremunere: data.isRemuneree,
     image: getAssetPath("img/absence.png"),
+    lienversjust: data.LienVersJustification,
+    
   };
 }
 
@@ -115,6 +122,7 @@ function fromAPIDoc(data: any): IDemandesDoc {
       Etat: data.etatActuel,
       Motif: data.commentaire,
       TypeDoc: data.typeDoc,
+      userid: data.userid,
         image: getAssetPath("img/document.png"),
     
     };
@@ -129,10 +137,12 @@ function fromAPIDoc(data: any): IDemandesDoc {
       DateCreation: data.dateCreation,
       Etat: data.etatActuel,
       Motif: data.commentaire,
+      
         TypeConge: data.typeConge,
         DateDebut: data.dateDebut,
         DateFin: data.dateFin,
         image: getAssetPath("img/conge.png"),
+        lienversjust: data.LienVersJustification,
     
     };
   }
@@ -162,6 +172,7 @@ function fromAPIDoc(data: any): IDemandesDoc {
       Etat: data.etatActuel,
       Motif: data.commentaire,
       TypeDoc: data.typeDoc,
+      equipe: data.equipe,
         TypeConge: data.typeConge,
         DateDebut: data.dateDebut,
         DateFin: data.dateFin,
@@ -174,6 +185,12 @@ function fromAPIDoc(data: any): IDemandesDoc {
     
     };
   }
+
+
+
+
+
+
 
 
 
@@ -202,6 +219,14 @@ export function fetchDemandesConge(): Promise<IDemandesConge[]> {
       return response.data.map(fromAPIChang);
     });
   }
+
+  export function UpdateDemande(id:number , etat:number ): Promise<IDemandesChang[]> {
+    return ApiService.query("Demande/update", {params:{id:id, newEtat:etat}}).then((response) => {
+      return response.data.map(fromAPIChang);
+    });
+  }
+
+
 
   export async function fetchDemandes(matricule: string): Promise<IDemandes[]> {
     try {

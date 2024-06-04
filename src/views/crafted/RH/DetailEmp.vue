@@ -40,7 +40,7 @@
             <!--begin::Position-->
             <div class="fs-5 fw-semibold text-muted mb-6">
 
-              <div  v-if="emp.poste == 0">
+              <div  v-if="emp.poste == '0'">
             
             
             Developpeur web
@@ -56,10 +56,18 @@
              <!--begin::Position-->
              <div class="fs-5 fw-semibold text-muted mb-6">
               
-              <div  v-if="emp.equipe == 1">
+              <div  v-if="emp.equipe == '56543'">
             
             
             Departement developpement
+
+          </div>
+
+
+          <div  v-if="emp.equipe == '7654'">
+            
+            
+            Departement informatique
 
           </div>
             
@@ -73,8 +81,8 @@
               <div
                 class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
               >
-                <div class="fs-4 fw-bold text-gray-700">
-                  <span class="w-75px">17</span>
+                <div class="fs-4 fw-bold text-gray-700" >
+                  <span class="w-75px">1</span>
                   <KTIcon icon-name="arrow-up" icon-class="fs-3 text-success" />
                 </div>
                 <div class="fw-semibold text-muted">Demandes acceptées</div>
@@ -407,7 +415,9 @@ import Logs from "@/components/customers/cards/events-and-logs/Logs.vue";
 
 import Earnings from "@/components/customers/cards/statments/Earnings.vue";
 import Statement from "@/components/customers/cards/statments/Statement.vue";
-import { fetchCustomersById, type ICustomer } from "@/core/data/customers";
+
+import  { fetchDemandes, type IDemandes } from "@/core/data/demande";
+import  { fetchCustomersById, type ICustomer } from "@/core/data/customers";
 import { useRoute } from "vue-router";
 
 export default defineComponent({
@@ -429,7 +439,29 @@ export default defineComponent({
 
 
 
-    const emp=  ref<Array<ICustomer>>([]);
+    const emp=  ref<ICustomer>({
+      id: "²",
+  name: "vccvbn",
+  email: "data.email",
+  equipe: "data.idEquipe.toString()",
+  dateentree: "data.dateEntre",
+  poste: "data.titre.toString()",
+  image: "data.LinkToPhoto",
+  nameAr: "data.nomArabe",
+  maidenName: "data.nomJeuneFille",
+  maidenNameAr: "data.nomJeuneFilleArabe",
+  dateNaissance: "data.dateNaissance",
+  lieuNaissance:" data.lieuNaissance",
+  Sexe: "data.sexe.toString()",
+  situationFamiliale: "data.situationFamiliale.toString()",
+  nombreEnfants: "data.nbEnfant?.toString() || ",
+  adresse: "`${data.communeNaissance}, ${data.wilayaNaissance}, ${data.paysNaissance}`",
+  telephone: "",
+  nationalite: "data.nationalites",
+  reliquat: "data.reliquat",
+  score: "data.score",
+
+    });
     //ref<Array<ICustomer>>(customers);
     const initCustomers = ref<Array<ICustomer>>([]);
 
@@ -442,14 +474,32 @@ export default defineComponent({
 
     onMounted(async () => {
       matricule.value = route.query.matricule as string;
-      if (matricule.value) {
-        
+      
+      console.log("test "+emp.value.name);
           emp.value = await fetchCustomersById(matricule.value);
-          console.log("test "+emp.value.image);
+         
 
        
-      }
+      
     });
+
+
+
+
+    const initDemandes = ref<Array<IDemandes>>([]);
+
+const Data = ref<Array<IDemandes>>([]);
+
+
+
+onMounted(async () => {
+  matricule.value = route.query.matricule as string;
+  
+const demandes = await fetchDemandes(matricule.value);
+Data.value = demandes;
+
+console.log(Data.value);
+});
 
 
 
@@ -457,7 +507,8 @@ export default defineComponent({
 
     return {
       getAssetPath,
-      emp
+      emp,
+      Data
     };
   },
 });

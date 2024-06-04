@@ -15,6 +15,8 @@
                 :title="user.title"
                 :description="user.description"
                 :username="user.username"
+                :userid="user.userid"
+                :typedoc="user.typedoc"
                 
               >
                 <img v-if="user.src" alt="Pic" :src="user.src" />
@@ -29,10 +31,15 @@
             </template>
           </div>
           <!--begin::Username-->
-        <p class="text-white-500 fw-italic fs-5 mt-1 mb-7">
+        <a
+          class="text-white-500 fw-italic fs-5 mt-1 mb-7"
+          :href="`DetailEmp?matricule=${userid}`"
+        >
           {{ username }}
-        </p>
+         
+        </a>
         <!--end::Username-->
+
           <!--end::Users-->
           
         </template>
@@ -51,6 +58,56 @@
         </div>
         <!--end::Name-->
   
+
+  <!--begin::Description-->
+  <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='0'"
+  >
+          Demande de congé
+        </p>
+        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='1'"
+  >
+  TitreDeConge
+        </p>
+        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='2'"
+  >
+  AutorisationAbsence
+        </p>
+        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='3'"
+  >
+  DemandeFormation
+        </p>
+        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='4'"
+  >
+  AttestationTravail
+        </p>
+        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='5'"
+  >
+  AttestationTravailEtSalaires
+        </p>
+        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='6'"
+  >
+  ReleverEmoluments
+        </p>
+        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='7'"
+  >
+  BulletinPaie
+        </p>
+        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7"
+  v-if="typedoc=='8'"
+  >
+  AttestationAffiliationCNAS
+        </p>
+
+        <!--end::Description-->
+
         <!--begin::Description-->
         <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">
           {{ description }}
@@ -74,12 +131,12 @@
             data-kt-drawer-target="#kt_drawer_chat"
             @click="openDrawer()"
           >
-          Inserer fichier
+          
           <label for="file-upload" class="upload-icon">
             
         <i class="fas fa-upload"></i>
     </label>
-    <input id="file-upload" type="file" class="file-input" onchange="handleFileUpload(event)">
+    <input id="file-upload" type="file" class="file-input" onchange="handleFileUpload(event)" style="color:cornflowerblue">
     
           </button>
           <!--end::Link-->
@@ -110,7 +167,10 @@ function handleFileUpload(event) {
             }
         }
 
-  import { computed, defineComponent } from "vue";
+  
+import Swal from "sweetalert2/dist/sweetalert2.js";
+  import { computed, defineComponent, ref } from "vue";
+import { hideModal } from "@/core/helpers/modal";
   
   export default defineComponent({
     name: "card-1",
@@ -125,6 +185,10 @@ function handleFileUpload(event) {
       status: String,
   
       icon: String,
+
+      typedoc: String,
+
+      userid: String,
   
       title: String,
   
@@ -140,6 +204,43 @@ function handleFileUpload(event) {
 
     
     setup(props) {
+
+
+      const formRef = ref<null | HTMLFormElement>(null);
+
+
+
+    const addCustomerModalRef = ref<null | HTMLElement>(null);
+
+
+    const submit = () => {
+     
+
+      
+        
+           
+
+     Swal.fire({
+       text: "la demande a été traitée avec succès!",
+       icon: "success",
+       buttonsStyling: false,
+       confirmButtonText: "Ok",
+       heightAuto: false,
+       customClass: {
+         confirmButton: "btn btn-primary",
+       },
+     }).then(() => {
+       
+       hideModal( addCustomerModalRef.value);
+       location.reload();
+     });
+  
+
+ 
+
+};
+
+
       const getDescription = computed(() => {
         return props.description
           ? props.description
@@ -171,6 +272,8 @@ function handleFileUpload(event) {
         getStatus,
         getStatusDataBadgeColor,
         getStatusDataColor,
+        submit,
+      addCustomerModalRef,
       };
     },
   });

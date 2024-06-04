@@ -28,55 +28,95 @@
     <!--end::Followers toolbar-->
   
     <!--begin::Row-->
-    <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
-      <!--begin::Followers-->
+    <div   class="row g-6 mb-6 g-xl-9 mb-xl-9"
+    style=" display: grid;
+  grid-template-columns: repeat(2, 600px);
+  gap: 20px; "
+    >
+
+
+    <span  @on-sort="sort"
+        @on-items-select="onItemSelect"
+        :data="tableData"
+        
+        :enable-items-per-page-dropdown="true" 
+        :checkbox-enabled="true"
+        checkbox-label="id"
+        v-for="(emp, index) in tableData" :key="index">
+
       <Card3
-        name="Patric Watson"
-        position="Art Director at Novica Co."
+
+      style="width: 500px;"
+
+        :name=emp.name
+        :position=emp.poste
         :Present="true"
-        :avatar="getAssetPath('media/avatars/300-11.jpg')"
+        
+        :avatar="getAssetPath(emp.image)"
         :present="true"
-      ></Card3>
-      <Card3
-        name="Richard Miller"
-        position="Ingenieur en SI"
-        :Present="true"
-        :avatar="getAssetPath('media/avatars/300-17.jpg')"
-        :present="true"
-      ></Card3>
-      <Card3
-        name="Radamel Falcao"
-        position="Data Analyst"
-        :Present="false"
-        :avatar="getAssetPath('media/avatars/300-2.jpg')"
-        :present="true"
-      ></Card3>
-      <Card3
-        name="Mustafa Amir"
-        position="Web Developer"
-        :Present="true"
-        :avatar="getAssetPath('media/avatars/300-12.jpg')"
-        :present="true"
-      ></Card3>
-  
-      <!--end::Followers-->
+        ></Card3>
+  </span>  
+
+      
     </div>
     <!--end::Row-->
   </template>
   
   <script lang="ts">
   import { getAssetPath } from "@/core/helpers/assets";
-  import { defineComponent } from "vue";
-  import Card3 from "@/components/cards/Card3.vue";
   
+  import Card3 from "@/components/cards/Card3.vue";
+  import { fetchCustomersByEquipe, type ICustomer } from "@/core/data/customers";
+// import customers from "@/core/data/customers";
+import arraySort from "array-sort";
+import { defineComponent, onMounted, ref } from "vue";
+import Datatable from "@/components/kt-datatable/KTDataTable.vue";
+import type { Sort } from "@/components/kt-datatable//table-partials/models";
+
+
+
   export default defineComponent({
     name: "profile-connections",
     components: {
       Card3,
     },
     setup() {
+
+      const selectedIds = ref<Array<number>>([]);
+      const tableData =ref<Array<ICustomer>>([]);
+    //ref<Array<ICustomer>>(customers);
+    const initCustomers = ref<Array<ICustomer>>([]);
+
+    onMounted(async () => {
+      const customers = await fetchCustomersByEquipe(7654);
+      tableData.value = customers;
+      console.log(customers.name);
+      // initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
+    });
+
+    const sort = (sort: Sort) => {
+      const reverse: boolean = sort.order === "asc";
+      if (sort.label) {
+        arraySort(tableData.value, sort.label, { reverse });
+      }
+    };
+    const onItemSelect = (selectedItems: Array<number>) => {
+      selectedIds.value = selectedItems;
+    };
+
+
+   
+
+
+
       return {
         getAssetPath,
+        tableData,
+        initCustomers,
+        sort,
+        onItemSelect,
+        
+
       };
     },
   });

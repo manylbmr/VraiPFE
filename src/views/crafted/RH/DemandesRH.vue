@@ -34,94 +34,23 @@
 
 
 
-    <!--begin::Col-->
-    <div  class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="DataConge"
-      v-for="(demande, index) in DataConge" :key="index">
-
-      <div  @on-sort="sort" @on-items-select="onItemSelect" :data="tableData"
-      v-for="(emp, index) in tableData" :key="index">
-
-    <div v-if="emp.id == demande.MatriculeEmp"   >
-        
-
-          <KTCardAbsCong 
-      :status=demande.Etat 
-      title="Demande de congé"
-        
-      :username="emp.name"
-        
-        :progress="50" 
-        :datedebut=demande.DateDebut
-         :DateFin=demande.DateFin
-         :description=demande.Motif 
-         :initials=emp.name.charAt(0)
-         :equipe=emp.equipe
-
-        :icon=emp.image
-        :userid=emp.id
-         :users="[
-           
-          
-        ]"
-        
-        ></KTCardAbsCong>
-
-
-
-        </div>
-    </div>
-    </div>
-    <!--end::Col-->
-
-
-
-
-<!--begin::Col-->
-<div class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="DataAbs"
-      v-for="(demande, index) in DataAbs" :key="index">
-      <div  @on-sort="sort" @on-items-select="onItemSelect" :data="tableData"
-      v-for="(emp, index) in tableData" :key="index">
-
-    <div v-if="emp.id == demande.MatriculeEmp"   >
-        
-
-          <KTCardAbsCong 
-      :status=demande.Etat 
-      title="Demande de congé"
-        
-      :username="emp.name"
-        
-        :progress="50" 
-        :datedebut=demande.DateDebut
-         :DateFin=demande.DateFin
-         :description=demande.Motif 
-         :initials=emp.name.charAt(0)
-         :equipe=emp.equipe
-
-        :icon=emp.image
-        :userid=emp.id
-         :users="[
-           
-          
-        ]"
-        
-        ></KTCardAbsCong>
-
-
-
-        </div>
-    </div>
-    </div>
-    <!--end::Col-->
-
+    
 
 
 
 
     <!--begin::Col-->
-    <div class="col-md-6 col-xl-4" @on-sort="sort" @on-items-select="onItemSelect" :data="DataDoc"
+    <div   @on-sort="sort" @on-items-select="onItemSelect" :data="DataDoc"
       v-for="(demande, index) in DataDoc" :key="index">
+      <div  v-if=" demande.Etat=='0'"   >
+      <div  @on-sort="sort" @on-items-select="onItemSelect" :data="tableData"
+      v-for="(emp, index) in tableData" :key="index">
+      <div v-if="emp.id == demande.MatriculeEmp"   >
+      
       <KTCardDoc
+
+      
+
       :status=demande.Etat 
       title="Demande de document"
         
@@ -129,12 +58,18 @@
         
         :progress="50" 
         :typedoc=demande.TypeDoc
+        :userid="demande.MatriculeEmp"
+        :username="emp.name"
+        :Etat="demande.Etat"
 
          :description=demande.Motif 
         :icon="getAssetPath('media/svg/brand-logos/plurk.svg')" :users="[
           
         ]">
         </KTCardDoc>
+    </div>
+      </div>
+      </div>
     </div>
     <!--end::Col-->
 
@@ -355,7 +290,47 @@ export default defineComponent({
     };
 
 
-
+    const users1 = [
+        
+        { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+  
+      ];
+  
+      const users2 = [
+      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      ];
+  
+      const users3 = [
+      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      ];
+  
+      const users4 = [
+      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      ];
+  
+      const users5 = [
+        {
+          name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") 
+        },
+        {
+          name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") 
+        },
+        { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      ];
+  
+     
+  
+      const users7 = [
+      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      ];
+  
+      
+  
+      const users9 = [
+      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      { name: "Rudy Stone", src: getAssetPath("media/avatars/300-1.jpg") },
+      ];
 
 
 
@@ -377,6 +352,14 @@ export default defineComponent({
       deleteFewDemandes,
       sort,
       tableData,
+      users1,
+      users2,
+      users3,
+      users4,
+      users5,
+      users7,
+      users9,
+
        
     };
   },

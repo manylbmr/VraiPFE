@@ -1,7 +1,12 @@
+
+
+
 <template>
+  <div  ref="addCustomerModalRef">
   <!--begin::Card-->
-  <a href="#" class="card border border-2 border-gray-300 border-hover">
+  <a href="#" class="card border border-2 border-gray-300 border-hover"   >
     <!--begin::Card header-->
+    <el-form @submit.prevent="submit()" >
     <div class="card-header border-0 pt-9">
       <template v-if="users">
         <!--begin::Users-->
@@ -21,6 +26,10 @@
               :icon="user.image"
               :equipe="user.equipe"
               :initials="user.initials"
+              :lienjust="user.lienjust"
+              :status="user.etat"
+              :iddemande="user.iddem"
+
             >
               <img v-if="user.src" alt="Pic" :src="user.src" />
               <span
@@ -44,9 +53,7 @@
         <!--end::Username-->
 
         <!--begin::Username-->
-        <p class="text-white-500 fw-italic fs-5 mt-1 mb-7">
-          {{ equipe }}
-        </p>
+        
         <!--end::Username-->
 
         <!--end::Users-->
@@ -57,9 +64,46 @@
 
     <!--begin:: Card body-->
     <div class="card-body p-9">
+      
+
       <!--begin::Name-->
       <div class="fs-3 fw-bold text-gray-900">
         {{ title }}
+      </div>
+      <div class="fs-3 fw-bold text-gray-900"
+      v-if="typeconge == '0'">
+      
+        annuel
+      </div>
+      <div class="fs-3 fw-bold text-gray-900"
+      v-if="typeconge == '1'">
+      
+        exceptionnel
+      </div>
+      <div class="fs-3 fw-bold text-gray-900"
+      v-if="typeconge == '2'">
+      
+        maladie
+      </div>
+      <div class="fs-3 fw-bold text-gray-900"
+      v-if="typeconge == '3'">
+      
+        Sans solde
+      </div>
+      <div class="fs-3 fw-bold text-gray-900"
+      v-if="typeconge == '4'">
+      
+        reliquat
+      </div>
+      <div class="fs-3 fw-bold text-gray-900"
+      v-if="typeconge == '5'">
+      
+       maternité
+      </div>
+      <div class="fs-3 fw-bold text-gray-900"
+      v-if="typeconge == '6'">
+      
+        paternité
       </div>
       <!--end::Name-->
 
@@ -71,7 +115,7 @@
 
       <!--begin::Justificatif-->
       <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">
-        <a href="path/to/your/file.zip" download>
+        <a href="lienjust" download>
           Justificatif
           <i class="fas fa-download download-icon"></i>
         </a>
@@ -118,6 +162,7 @@
         :title="`This project ${progress}% completed`"
       >
         <div
+       
           :class="getStatusDataColor"
           class="rounded h-4px"
           role="progressbar"
@@ -126,6 +171,7 @@
           aria-valuemin="0"
           aria-valuemax="100"
         ></div>
+        
       </div>
       <!--end::Progress-->
 
@@ -136,7 +182,8 @@
         class="btn btn-sm btn-light-primary fw-bold"
         data-kt-drawer-toggle="true"
         data-kt-drawer-target="#kt_drawer_chat"
-        @click="openDrawer()"
+        
+        @click="console.log('essai'+iddemande)"
       >
         Accepter
       </button>
@@ -147,7 +194,7 @@
         class="btn btn-sm btn-light-primary fw-bold"
         data-kt-drawer-toggle="true"
         data-kt-drawer-target="#kt_drawer_chat"
-        @click="openDrawer()"
+        @click="UpdateDemande(iddemande!,2)"
       >
         Refuser
       </button>
@@ -158,17 +205,25 @@
       <!--end::Card Title-->
     </div>
     <!--end:: Card body-->
+  </el-form>
   </a>
   <!--end::Card-->
+</div>
 </template>
 
+
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
+import { hideModal } from "@/core/helpers/modal";
+import { hide } from "@popperjs/core";
+import { UpdateDemande,type IDemandesChang } from "@/core/data/demande";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 export default defineComponent({
   name: "card-1",
   components: {},
   props: {
+    iddemande: Number,
     progress: Number,
     statusDataBadgeColor: String,
     statusDataColor: String,
@@ -183,9 +238,58 @@ export default defineComponent({
     DateFin: String,
     equipe: String,
     userid: String,
+    
     users: Array as () => Array<any>,
   },
   setup(props) {
+
+    const formRef = ref<null | HTMLFormElement>(null);
+
+
+
+    const addCustomerModalRef = ref<null | HTMLElement>(null);
+
+
+
+
+
+
+    const submit = () => {
+     
+      
+
+      
+        
+           
+
+            Swal.fire({
+              text: "la demande a été traitée avec succès!",
+              icon: "success",
+              buttonsStyling: false,
+              confirmButtonText: "Ok",
+              heightAuto: false,
+              customClass: {
+                confirmButton: "btn btn-primary",
+              },
+            }).then(() => {
+              
+              hideModal( addCustomerModalRef.value);
+              location.reload();
+            });
+         
+       
+        
+      
+    };
+
+
+
+
+
+
+
+
+
     const getStatus = computed(() => {
       return props.status ? props.status : "In Progress";
     });
@@ -204,6 +308,9 @@ export default defineComponent({
       getStatus,
       getStatusDataBadgeColor,
       getStatusDataColor,
+      submit,
+      addCustomerModalRef,
+      UpdateDemande,	
     };
   },
 });

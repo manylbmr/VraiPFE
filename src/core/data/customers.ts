@@ -1,10 +1,11 @@
 import { getAssetPath } from "@/core/helpers/assets";
 import ApiService from "../services/ApiService";
 
-interface ICustomer {id: string;
+interface ICustomer {
+  id: string;
   name: string;
   email: string;
-  equipe: string;
+  equipe: number;
   dateentree: string;
   poste: string;
   image: string;
@@ -45,6 +46,10 @@ function fromAPI(data: any): ICustomer { return {
   score: data.score,
 };}
 
+
+
+
+
 ApiService.setHeader();
 
 export function fetchCustomers(): Promise<ICustomer[]> {
@@ -57,14 +62,37 @@ export function fetchCustomers(): Promise<ICustomer[]> {
 
 
 
+
+
+export  function fetchCustomersByEquipe(matricule: number): Promise<ICustomer[]> {
+  
+
+  return ApiService.query("Employee/GetEmployeesByEquipe?idEquipe=7654", { params: { idEquipe: matricule } }).then((response) => {
+    console.log('matricule est:'+ matricule);
+    console.log('resultat de loperation est:'+ response.data.name);
+
+    return response.data.map(fromAPI);
+   
+  
+  });
+
+
+
+  
+
+}
+
+
 export async function fetchCustomersById(matricule: string): Promise<ICustomer> {
   
-    const response = await ApiService.query("Employee/GetEmployeeById", { params: { mat: matricule } });
-   
+    const response = await ApiService.query("Employee/GetEmployeesById", { params: { id: matricule } });
+   console.log('resultat est:'+ response.data);
     
     return fromAPI(response.data);
   
 }
+
+
 
 
 

@@ -14,7 +14,7 @@
               v-model="search"
               @input="searchItems()"
               class="form-control form-control-solid w-250px ps-15"
-              placeholder="chercher employé"
+              placeholder="chercher équipe"
             />
           </div>
           <!--end::Search-->
@@ -26,7 +26,7 @@
           <div
             v-if="selectedIds.length === 0"
             class="d-flex justify-content-end"
-            data-kt-customer-table-toolbar="base"
+            data-kt-equipe-table-toolbar="base"
           >
            
             <!--begin::Add customer-->
@@ -34,10 +34,10 @@
               type="button"
               class="btn btn-primary"
               data-bs-toggle="modal"
-              data-bs-target="#kt_modal_add_customer"
+              data-bs-target="#kt_modal_add_equipe"
             >
               <KTIcon icon-name="plus" icon-class="fs-2" />
-              Ajouter employé
+              Ajouter équipe
             </button>
             <!--end::Add customer-->
           </div>
@@ -46,7 +46,7 @@
           <div
             v-else
             class="d-flex justify-content-end align-items-center"
-            data-kt-customer-table-toolbar="selected"
+            data-kt-equipe-table-toolbar="selected"
           >
             <div class="fw-bold me-5">
               <span class="me-2">{{ selectedIds.length }}</span
@@ -64,19 +64,19 @@
           <!--begin::Group actions-->
           <div
             class="d-flex justify-content-end align-items-center d-none"
-            data-kt-customer-table-toolbar="selected"
+            data-kt-equipe-table-toolbar="selected"
           >
             <div class="fw-bold me-5">
               <span
                 class="me-2"
-                data-kt-customer-table-select="selected_count"
+                data-kt-equipe-table-select="selected_count"
               ></span
               >Selected
             </div>
             <button
               type="button"
               class="btn btn-danger"
-              data-kt-customer-table-select="delete_selected"
+              data-kt-equipe-table-select="delete_selected"
             >
               Delete Selected
             </button>
@@ -98,22 +98,20 @@
           <template v-slot:name="{ row: customer }">
             {{ customer.name }}
           </template>
-          <template v-slot:email="{ row: customer }">
+          <template v-slot:rattachée="{ row: customer }">
             <a href="#" class="text-gray-600 text-hover-primary mb-1">
-              {{ customer.email }}
+              {{ customer.rattachée }}
             </a>
           </template>
-          <template v-slot:equipe="{ row: customer }">
-            {{ customer.equipe }}
+          <template v-slot:chef="{ row: customer }">
+            {{ customer.responsable }}
           </template>
-          <template v-slot:poste="{ row: customer }">
+          <template v-slot:nbEmp="{ row: customer }">
            {{
               customer.poste
             }}
           </template>
-          <template v-slot:dateentree="{ row: customer }">
-            {{ customer.dateentree }}
-          </template>
+         
           <template v-slot:actions="{ row: customer }">
             <a
               href="#"
@@ -132,7 +130,7 @@
               <!--begin::Menu item-->
               <div class="menu-item px-3">
                 <router-link
-                  to="/apps/customers/customer-details"
+                  to="DetailEmp"
                   class="menu-link px-3"
                   >View</router-link
                 >
@@ -153,7 +151,7 @@
     </div>
   
     <ExportCustomerModal></ExportCustomerModal>
-    <AddCustomerModal></AddCustomerModal>
+    <AddEquipeModal></AddEquipeModal>
   </template>
   
   <script lang="ts">
@@ -162,51 +160,57 @@
   import Datatable from "@/components/kt-datatable/KTDataTable.vue";
   import type { Sort } from "@/components/kt-datatable//table-partials/models";
   import ExportCustomerModal from "@/components/modals/forms/ExportCustomerModal.vue";
-  import AddCustomerModal from "@/components/modals/forms/AddCustomerModal.vue";
-  import { fetchCustomers, type ICustomer } from "@/core/data/customers";
+  import AddEquipeModal from "@/components/modals/forms/AddEquipeModal.vue";
+  
   // import customers from "@/core/data/customers";
   import arraySort from "array-sort";
   import { MenuComponent } from "@/assets/ts/components";
+  import { fetchEquipe, type IEquipe } from "@/core/data/equipe";
+
+
   
   export default defineComponent({
     name: "customers-listing",
     components: {
       Datatable,
       ExportCustomerModal,
-      AddCustomerModal,
+      AddEquipeModal,
     },
+  
+  
+  
+   
+    
+  
+  
+  
     setup() {
       const tableHeader = ref([
         {
-          columnName: "Nom complet",
+          columnName: "Nom équipe",
           columnLabel: "name",
           sortEnabled: true,
           columnWidth: 175,
         },
         {
-          columnName: "Email",
-          columnLabel: "email",
+          columnName: "Rattachée à",
+          columnLabel: "rattachée",
           sortEnabled: true,
           columnWidth: 230,
         },
         {
-          columnName: "Equipe",
-          columnLabel: "equipe",
+          columnName: "Chef",
+          columnLabel: "chef",
           sortEnabled: true,
           columnWidth: 175,
         },
         {
-          columnName: "poste",
-          columnLabel: "poste",
+          columnName: "nombre d'employés",
+          columnLabel: "nbEmp",
           sortEnabled: true,
           columnWidth: 175,
         },
-        {
-          columnName: "Date d'entrée",
-          columnLabel: "dateentree",
-          sortEnabled: true,
-          columnWidth: 225,
-        },
+       
         {
           columnName: "Actions",
           columnLabel: "actions",
@@ -216,15 +220,20 @@
       ]);
       const selectedIds = ref<Array<number>>([]);
   
-      const tableData =ref<Array<ICustomer>>([]);
+      const tableData =ref<Array<IEquipe>>([]);
       //ref<Array<ICustomer>>(customers);
-      const initCustomers = ref<Array<ICustomer>>([]);
+      const initEquipe = ref<Array<IEquipe>>([]);
   
       onMounted(async () => {
-        const customers = await fetchCustomers();
-        tableData.value = customers;
+        const equipes = await fetchEquipe();
+        tableData.value = equipes;
+        console.log(equipes);
         // initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
       });
+  
+  
+      
+  
   
       const deleteFewCustomers = () => {
         selectedIds.value.forEach((item) => {
@@ -233,7 +242,7 @@
         selectedIds.value.length = 0;
       };
   
-      const deleteCustomer = (id: number) => {
+      const deleteCustomer = (id: string) => {
         for (let i = 0; i < tableData.value.length; i++) {
           if (tableData.value[i].id === id) {
             tableData.value.splice(i, 1);
@@ -245,7 +254,7 @@
       const searchItems = () => {
         tableData.value.splice(0, tableData.value.length, ...initCustomers.value);
         if (search.value !== "") {
-          let results: Array<ICustomer> = [];
+          let results: Array<IEquipe> = [];
           for (let j = 0; j < tableData.value.length; j++) {
             if (searchingFunc(tableData.value[j], search.value)) {
               results.push(tableData.value[j]);
