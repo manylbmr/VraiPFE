@@ -1,12 +1,6 @@
 <template>
   <!--begin::Modal - New Target-->
-  <div
-    class="modal fade"
-    id="kt_modal_new_target"
-    ref="newTargetModalRef"
-    tabindex="-1"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="kt_modal_new_target" ref="newTargetModalRef" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
       <!--begin::Modal content-->
@@ -14,10 +8,7 @@
         <!--begin::Modal header-->
         <div class="modal-header pb-0 border-0 justify-content-end">
           <!--begin::Close-->
-          <div
-            class="btn btn-sm btn-icon btn-active-color-primary"
-            data-bs-dismiss="modal"
-          >
+          <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
             <KTIcon icon-name="cross" icon-class="fs-1" />
           </div>
           <!--end::Close-->
@@ -27,21 +18,15 @@
         <!--begin::Modal body-->
         <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
           <!--begin:Form-->
-          <el-form
-            id="kt_modal_new_target_form"
-            @submit.prevent="submit()"
-            :model="targetData"
-            :rules="rules"
-            ref="formRef"
-            class="form"
-          >
+          <el-form id="kt_modal_new_target_form" @submit.prevent="submit()" :model="targetData" :rules="rules"
+            ref="formRef" class="form">
             <!--begin::Heading-->
             <div class="mb-13 text-center">
               <!--begin::Title-->
-              <h1 class="mb-3">formulaire de demande d'absence</h1>
+              <h1 class="mb-3">Demande d'absence</h1>
               <!--end::Title-->
 
-             
+
             </div>
             <!--end::Heading-->
 
@@ -49,28 +34,21 @@
             <div class="d-flex flex-column mb-8 fv-row">
               <!--begin::Label-->
               <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                <span class="required">titre de la demande</span>
-                <i
-                  class="fas fa-exclamation-circle ms-2 fs-7"
-                  data-bs-toggle="tooltip"
-                  title="Specify a target name for future usage and reference"
-                ></i>
+                <span class="required">Titre de la demande</span>
+                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                  title="Specify a target name for future usage and reference"></i>
               </label>
               <!--end::Label-->
 
               <el-form-item prop="targetTitle">
-                <el-input
-                  v-model="targetData.targetTitle"
-                  placeholder="Entrer un titre"
-                  name="targetTitle"
-                ></el-input>
+                <el-input v-model="targetData.targetTitle" placeholder="Entrer un titre" name="targetTitle"></el-input>
               </el-form-item>
             </div>
             <!--end::Input group-->
 
             <!--begin::Input group-->
             <div class="row g-9 mb-8">
-              
+
 
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
@@ -80,14 +58,8 @@
                 <div class="position-relative align-items-center">
                   <!--begin::Datepicker-->
                   <el-form-item prop="DateDebut">
-                    <el-date-picker
-                      v-model="targetData.DateDebut"
-                      type="date"
-                      placeholder="Select a date"
-                      :teleported="false"
-                      popper-class="override-styles"
-                      name="DateDebut"
-                    />
+                    <el-date-picker v-model="targetData.DateDebut" type="date" placeholder="Select a date"
+                      :teleported="false" popper-class="override-styles" name="DateDebut" />
                   </el-form-item>
                   <!--end::Datepicker-->
                 </div>
@@ -95,22 +67,16 @@
               </div>
               <!--end::Col-->
 
-<!--begin::Col-->
-<div class="col-md-6 fv-row">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
                 <label class="required fs-6 fw-semibold mb-2">Date Fin</label>
 
                 <!--begin::Input-->
                 <div class="position-relative align-items-center">
                   <!--begin::Datepicker-->
                   <el-form-item prop="DateFin">
-                    <el-date-picker
-                      v-model="targetData.DateFin"
-                      type="date"
-                      placeholder="Select a date"
-                      :teleported="false"
-                      popper-class="override-styles"
-                      name="DateFin"
-                    />
+                    <el-date-picker v-model="targetData.DateFin" type="date" placeholder="Select a date"
+                      :teleported="false" popper-class="override-styles" name="DateFin" />
                   </el-form-item>
                   <!--end::Datepicker-->
                 </div>
@@ -122,31 +88,21 @@
 
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
-                <label class="required fs-6 fw-semibold mb-2">type</label>
+                <label class="required fs-6 fw-semibold mb-2">Type</label>
 
                 <el-form-item prop="assign">
-                  <el-select
-                    v-model="targetData.assign"
-                    placeholder="Selectionner un type"
-                    name="assign"
-                    as="select"
-                  >
-                    
-                    <el-option label="Absence Remunérée (Max 5 days)" value="1"
-                      >Absence Remunérée (Max 5 days)</el-option
-                    >
+                  <el-select v-model="targetData.assign" placeholder="Selectionner un type" name="assign" as="select">
 
-                    <el-option label="Absence Non Remunérée (Max 5 days)" value="2"
-                      >Absence Non Remunérée (Max 5 days)</el-option
-                    >
+                    <el-option label="Absence Remunérée (Max 5 days)" value="1">Absence Remunérée (Max 5
+                      jours)</el-option>
 
-                   </el-select>
+                    <el-option label="Absence Non Remunérée (Max 5 days)" value="2">Absence Non Remunérée (Max 5
+                      jours)</el-option>
+
+                  </el-select>
                 </el-form-item>
               </div>
               <!--end::Col-->
-              
-
-
 
             </div>
             <!--end::Input group-->
@@ -156,13 +112,8 @@
               <label class="fs-6 fw-semibold mb-2">Details</label>
 
               <el-form-item prop="targetDetails">
-                <el-input
-                  v-model="targetData.targetDetails"
-                  type="textarea"
-                  rows="3"
-                  name="targetDetails"
-                  placeholder="Entrez les details de la demande"
-                />
+                <el-input v-model="targetData.targetDetails" type="textarea" rows="3" name="targetDetails"
+                  placeholder="Entrez les details de la demande" />
               </el-form-item>
             </div>
             <!--end::Input group-->
@@ -174,97 +125,26 @@
               <label class="fs-6 fw-semibold mb-2">Introduire Document justificatif</label>
 
               <el-form-item prop="targetDoc">
-                <el-input
-                  v-model="targetData.targetDoc"
-                  type="file"
-                 
-                  name="targetDoc"
-                 
-                />
+                <el-input v-model="targetData.targetDoc" type="file" name="targetDoc" />
               </el-form-item>
-            </div>
-            <!--end::Input group-->
-
-
-          
-          
-
-            <!--begin::Input group-->
-            <div class="mb-15 fv-row">
-              <!--begin::Wrapper-->
-              <div class="d-flex flex-stack">
-                <!--begin::Label-->
-                <div class="fw-semibold me-5">
-                  <label class="fs-6">Notifications</label>
-
-                  <div class="fs-7 text-gray-500">
-                    Autoriser les notifications par Email
-                  </div>
-                </div>
-                <!--end::Label-->
-
-                <!--begin::Checkboxes-->
-                <div class="d-flex align-items-center">
-                  <!--begin::Checkbox-->
-                  <label
-                    class="form-check form-check-custom form-check-solid me-10"
-                  >
-                    <input
-                      class="form-check-input h-20px w-20px"
-                      type="checkbox"
-                      name="communication[]"
-                      value="email"
-                      checked
-                    />
-
-                    <span class="form-check-label fw-semibold"> Oui </span>
-                  </label>
-                  <!--end::Checkbox-->
-
-                  <!--begin::Checkbox-->
-                  <label class="form-check form-check-custom form-check-solid">
-                    <input
-                      class="form-check-input h-20px w-20px"
-                      type="checkbox"
-                      name="communication[]"
-                      value="phone"
-                    />
-
-                    <span class="form-check-label fw-semibold"> Non </span>
-                  </label>
-                  <!--end::Checkbox-->
-                </div>
-                <!--end::Checkboxes-->
-              </div>
-              <!--end::Wrapper-->
             </div>
             <!--end::Input group-->
 
             <!--begin::Actions-->
             <div class="text-center">
-              <button
-                type="reset"
-                id="kt_modal_new_target_cancel"
-                class="btn btn-light me-3"
-              >
+              <button type="reset" id="kt_modal_new_target_cancel" class="btn btn-light me-3">
                 Cancel
               </button>
 
               <!--begin::Button-->
-              <button
-                :data-kt-indicator="loading ? 'on' : null"
-                class="btn btn-lg btn-primary"
-                type="submit"
-              >
+              <button :data-kt-indicator="loading ? 'on' : null" class="btn btn-lg btn-primary" type="submit">
                 <span v-if="!loading" class="indicator-label">
                   Submit
                   <KTIcon icon-name="arrow-right" icon-class="fs-3 ms-2 me-0" />
                 </span>
                 <span v-if="loading" class="indicator-progress">
                   Please wait...
-                  <span
-                    class="spinner-border spinner-border-sm align-middle ms-2"
-                  ></span>
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                 </span>
               </button>
               <!--end::Button-->
@@ -298,6 +178,7 @@ import { getAssetPath } from "@/core/helpers/assets";
 import { defineComponent, ref } from "vue";
 import { hideModal } from "@/core/helpers/modal";
 import Swal from "sweetalert2/dist/sweetalert2.js";
+import ApiService from "@/core/services/ApiService";
 
 interface NewAddressData {
   targetTitle: string;
@@ -305,7 +186,7 @@ interface NewAddressData {
   DateDebut: string;
   DateFin: string;
   targetDetails: string;
-  targetDoc: File;
+  targetDoc: File | null;
   tags: Array<string>;
 }
 
@@ -345,15 +226,41 @@ export default defineComponent({
       DateDebut: [
         {
           required: true,
-          message: "Please select Activity zone",
+          message: "Veuillez sélectionner une date",
           trigger: "change",
+        },
+        {
+          validator: (rule, value, callback) => {
+            const today = new Date();
+            const selectedDate = new Date(value);
+            if (selectedDate < today) {
+              callback(new Error("La date ne peut pas être antérieure à aujourd'hui"));
+            } else {
+              callback();
+            }
+          },
         },
       ],
       DateFin: [
         {
           required: true,
-          message: "Please select Activity zone",
+          message: "Veuillez sélectionner une date",
           trigger: "change",
+        },
+        {
+          validator: (rule, value, callback) => {
+            const today = new Date();
+            const selectedDate = new Date(value);
+            const maxDate = new Date(targetData.value.DateDebut);
+            maxDate.setDate(maxDate.getDate() + 5);
+            if (selectedDate < new Date(targetData.value.DateDebut)) {
+              callback(new Error("La date ne peut pas être antérieure à la date de début"));
+            } else if (selectedDate > maxDate) {
+              callback(new Error("La date ne peut pas être plus de 5 jours après la date de début"));
+            } else {
+              callback();
+            }
+          },
         },
       ],
       tags: [
@@ -373,6 +280,16 @@ export default defineComponent({
       formRef.value.validate((valid: boolean) => {
         if (valid) {
           loading.value = true;
+
+          const dateDebut = targetData.value.DateDebut;
+          const formattedDate = new Date(dateDebut).toISOString().split('T')[0];
+          targetData.value.DateDebut = formattedDate;
+          const dateFin = targetData.value.DateFin;
+          const formattedDateFin = new Date(dateFin).toISOString().split('T')[0];
+          targetData.value.DateFin = formattedDateFin;
+          ApiService.post(`Demande/Insert?type=1&dateDebut=${targetData.value.DateDebut}&dateFin=${targetData.value.DateFin}&isRemeneree=${targetData.value.assign == '1'}&commentaire=${targetData.value.targetDetails}`, targetData.value).then(() => {
+
+          });
 
           setTimeout(() => {
             loading.value = false;

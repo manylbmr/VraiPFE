@@ -38,7 +38,7 @@
               <!--begin::Heading-->
               <div class="mb-13 text-center">
                 <!--begin::Title-->
-                <h1 class="mb-3">formulaire de demande de congé</h1>
+                <h1 class="mb-3">Demande de congé</h1>
                 <!--end::Title-->
   
                
@@ -49,7 +49,7 @@
               <div class="d-flex flex-column mb-8 fv-row">
                 <!--begin::Label-->
                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                  <span class="required">titre de la demande</span>
+                  <span class="required">Titre de la demande</span>
                   <i
                     class="fas fa-exclamation-circle ms-2 fs-7"
                     data-bs-toggle="tooltip"
@@ -81,14 +81,16 @@
                   <div class="position-relative align-items-center">
                     <!--begin::Datepicker-->
                     <el-form-item prop="DateDebut">
-                      <el-date-picker
-                        v-model="targetData.DateDebut"
-                        type="date"
-                        placeholder="Select a date"
-                        :teleported="false"
-                        popper-class="override-styles"
-                        name="DateDebut"
-                      />
+                        <el-date-picker
+                          v-model="targetData.DateDebut"
+                          type="date"
+                          placeholder="Select a date"
+                          :teleported="false"
+                          popper-class="override-styles"
+                          name="DateDebut"
+                          :default-value="new Date()"
+                          :picker-options="{ minDate: new Date() }"
+                        />
                     </el-form-item>
                     <!--end::Datepicker-->
                   </div>
@@ -111,6 +113,7 @@
                         :teleported="false"
                         popper-class="override-styles"
                         name="DateFin"
+                        :picker-options="{ minDate: targetData.DateDebut }"
                       />
                     </el-form-item>
                     <!--end::Datepicker-->
@@ -122,7 +125,7 @@
 
    <!--begin::Col-->
    <div class="col-md-6 fv-row">
-                  <label class="required fs-6 fw-semibold mb-2">type</label>
+                  <label class="required fs-6 fw-semibold mb-2">Type</label>
   
                   <el-form-item prop="assign">
                     <el-select
@@ -132,23 +135,23 @@
                       as="select"
                     >
                       
-                      <el-option label="annuel" value="1"
+                      <el-option label="annuel" value="0"
                         >Annuel</el-option
                       >
   
-                      <el-option label="sans solde" value="2"
+                      <el-option label="sans solde" value="3"
                         >Sans solde</el-option
                       >
 
-                      <el-option label="maladie" value="3"
+                      <el-option label="maladie" value="2"
                         >Maladie</el-option
                       >
   
-                      <el-option label="exceptionnel" value="4"
+                      <el-option label="exceptionnel" value="1"
                         >exceptionnel</el-option
                       >
 
-                      <el-option label="Reliquat" value="5"
+                      <el-option label="Reliquat" value="4"
                         >Reliquat</el-option
                       >
 
@@ -179,8 +182,6 @@
               </div>
               <!--end::Input group-->
   
-  
-  
               <!--begin::Input group-->
               <div class="d-flex flex-column mb-8">
                 <label class="fs-6 fw-semibold mb-2">Introduire Document justificatif</label>
@@ -194,61 +195,6 @@
                    
                   />
                 </el-form-item>
-              </div>
-              <!--end::Input group-->
-  
-  
-            
-            
-  
-              <!--begin::Input group-->
-              <div class="mb-15 fv-row">
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-stack">
-                  <!--begin::Label-->
-                  <div class="fw-semibold me-5">
-                    <label class="fs-6">Notifications</label>
-  
-                    <div class="fs-7 text-gray-500">
-                      Autoriser les notifications par Email
-                    </div>
-                  </div>
-                  <!--end::Label-->
-  
-                  <!--begin::Checkboxes-->
-                  <div class="d-flex align-items-center">
-                    <!--begin::Checkbox-->
-                    <label
-                      class="form-check form-check-custom form-check-solid me-10"
-                    >
-                      <input
-                        class="form-check-input h-20px w-20px"
-                        type="checkbox"
-                        name="communication[]"
-                        value="email"
-                        checked
-                      />
-  
-                      <span class="form-check-label fw-semibold"> Oui </span>
-                    </label>
-                    <!--end::Checkbox-->
-  
-                    <!--begin::Checkbox-->
-                    <label class="form-check form-check-custom form-check-solid">
-                      <input
-                        class="form-check-input h-20px w-20px"
-                        type="checkbox"
-                        name="communication[]"
-                        value="phone"
-                      />
-  
-                      <span class="form-check-label fw-semibold"> Non </span>
-                    </label>
-                    <!--end::Checkbox-->
-                  </div>
-                  <!--end::Checkboxes-->
-                </div>
-                <!--end::Wrapper-->
               </div>
               <!--end::Input group-->
   
@@ -310,6 +256,7 @@
   import { defineComponent, ref } from "vue";
   import { hideModal } from "@/core/helpers/modal";
   import Swal from "sweetalert2/dist/sweetalert2.js";
+import ApiService from "@/core/services/ApiService";
   
   interface NewAddressData {
     targetTitle: string;
@@ -317,7 +264,7 @@
     DateDebut: string;
     DateFin: string;
     targetDetails: string;
-    targetDoc: File;
+    targetDoc: File | null;
     tags: Array<string>;
   }
   
@@ -357,17 +304,35 @@
           },
         ],
         DateDebut: [
-          {
+            {
             required: true,
             message: "Please select Activity zone",
             trigger: "change",
-          },
+            validator: (rule, value, callback) => {
+              const today = new Date();
+              const selectedDate = new Date(value);
+              if (selectedDate < today) {
+                callback(new Error("La date ne peut pas être antérieure à aujourd'hui"));
+              } else {
+              callback();
+              }
+            },
+            },
         ],
         DateFin: [
           {
             required: true,
             message: "Please select Activity zone",
             trigger: "change",
+            validator: (rule, value, callback) => {
+              const today = new Date();
+              const selectedDate = new Date(value);
+              if (selectedDate < today || selectedDate < new Date(targetData.value.DateDebut)) {
+                callback(new Error("La date ne peut pas être antérieure à aujourd'hui ou à la date de début"));
+              } else {
+                callback();
+              }
+            },
           },
         ],
         tags: [
@@ -390,7 +355,20 @@
   
             setTimeout(() => {
               loading.value = false;
+
+                const dateDebut = targetData.value.DateDebut;
+                const formattedDate = new Date(dateDebut).toISOString().split('T')[0];
+                targetData.value.DateDebut = formattedDate;
+                const dateFin = targetData.value.DateFin;
+                const formattedDateFin = new Date(dateFin).toISOString().split('T')[0];
+                targetData.value.DateFin = formattedDateFin;
+                const url = `Demande/Insert?type=0&dateDebut=${targetData.value.DateDebut}&dateFin=${targetData.value.DateFin}&typeConge=${targetData.value.assign}&commentaire=${targetData.value.targetDetails}`;
+              ApiService.post(url, targetData.value).then((response) => {
+                console.log(response);
+              });
   
+                console.log(targetData.value);
+
               Swal.fire({
                 text: "Form has been successfully submitted!",
                 icon: "success",

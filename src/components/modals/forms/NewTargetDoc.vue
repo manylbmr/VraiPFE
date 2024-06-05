@@ -38,7 +38,7 @@
               <!--begin::Heading-->
               <div class="mb-13 text-center">
                 <!--begin::Title-->
-                <h1 class="mb-3">formulaire de demande de document</h1>
+                <h1 class="mb-3">Demande de document</h1>
                 <!--end::Title-->
   
                
@@ -49,7 +49,7 @@
               <div class="d-flex flex-column mb-8 fv-row">
                 <!--begin::Label-->
                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                  <span class="required">titre de la demande</span>
+                  <span class="required">Titre de la demande</span>
                   <i
                     class="fas fa-exclamation-circle ms-2 fs-7"
                     data-bs-toggle="tooltip"
@@ -72,7 +72,7 @@
               <div class="row g-9 mb-8">
                 <!--begin::Col-->
                 <div class="col-md-6 fv-row">
-                  <label class="required fs-6 fw-semibold mb-2">type</label>
+                  <label class="required fs-6 fw-semibold mb-2">Type</label>
   
                   <el-form-item prop="assign">
                     <el-select
@@ -82,15 +82,15 @@
                       as="select"
                     >
                       
-                      <el-option label="Attestation de travail" value="1"
+                      <el-option label="Attestation de travail" value="4"
                         >Attestation de travail</el-option
                       >
   
-                      <el-option label="Attestation de travail et des salaires (ATS)" value="2"
+                      <el-option label="Attestation de travail et des salaires (ATS)" value="5"
                         >Attestation de travail et des salaires (ATS)</el-option
                       >
 
-                      <el-option label="Relevé des émoluments" value="3"
+                      <el-option label="Relevé des émoluments" value="6"
                         >Relevé des émoluments</el-option
                       >
 
@@ -134,61 +134,7 @@
                 </el-form-item>
               </div>
               <!--end::Input group-->
-  
-  
-            
-  
-              <!--begin::Input group-->
-              <div class="mb-15 fv-row">
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-stack">
-                  <!--begin::Label-->
-                  <div class="fw-semibold me-5">
-                    <label class="fs-6">Notifications</label>
-  
-                    <div class="fs-7 text-gray-500">
-                      Autoriser les notifications par Email
-                    </div>
-                  </div>
-                  <!--end::Label-->
-  
-                  <!--begin::Checkboxes-->
-                  <div class="d-flex align-items-center">
-                    <!--begin::Checkbox-->
-                    <label
-                      class="form-check form-check-custom form-check-solid me-10"
-                    >
-                      <input
-                        class="form-check-input h-20px w-20px"
-                        type="checkbox"
-                        name="communication[]"
-                        value="email"
-                        checked
-                      />
-  
-                      <span class="form-check-label fw-semibold"> Oui </span>
-                    </label>
-                    <!--end::Checkbox-->
-  
-                    <!--begin::Checkbox-->
-                    <label class="form-check form-check-custom form-check-solid">
-                      <input
-                        class="form-check-input h-20px w-20px"
-                        type="checkbox"
-                        name="communication[]"
-                        value="phone"
-                      />
-  
-                      <span class="form-check-label fw-semibold"> Non </span>
-                    </label>
-                    <!--end::Checkbox-->
-                  </div>
-                  <!--end::Checkboxes-->
-                </div>
-                <!--end::Wrapper-->
-              </div>
-              <!--end::Input group-->
-  
+
               <!--begin::Actions-->
               <div class="text-center">
                 <button
@@ -247,6 +193,7 @@
   import { defineComponent, ref } from "vue";
   import { hideModal } from "@/core/helpers/modal";
   import Swal from "sweetalert2/dist/sweetalert2.js";
+import ApiService from "@/core/services/ApiService";
   
   interface NewAddressData {
     targetTitle: string;
@@ -254,7 +201,7 @@
     DateDebut: string;
     DateFin: string;
     targetDetails: string;
-    targetDoc: File;
+    targetDoc: File | null;
     tags: Array<string>;
   }
   
@@ -322,6 +269,10 @@
         formRef.value.validate((valid: boolean) => {
           if (valid) {
             loading.value = true;
+
+            ApiService.post(`Demande/Insert?type=3&typeDocument=${targetData.value.assign}&commentaire=${targetData.value.targetDetails}`, targetData.value).then((response) => {
+              console.log(response);
+            });
   
             setTimeout(() => {
               loading.value = false;
